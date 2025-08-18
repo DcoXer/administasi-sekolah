@@ -24,7 +24,6 @@ Lihat sistem berjalan langsung:
 
 ## ✨ Fitur Utama
 - 📚 **Manajemen Data Siswa** (CRUD data siswa & guru)  
-- 🏫 **Manajemen Kelas & Jadwal**  
 - 🧾 **Pencatatan Administrasi & Pembayaran**  
 - 📊 **Dashboard Interaktif** dengan grafik statistik  
 - 🔐 **Autentikasi & Role Management** (Admin, Guru, Siswa)  
