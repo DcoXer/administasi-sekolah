@@ -11,14 +11,14 @@
 ## 📸 Preview
 Tampilan modern & responsif menggunakan **TailwindCSS**.
 
-![Screenshot](assets/screenshot.png)
+![Screenshot](VID-20250818-WA0002.jpg)
 
 ---
 
 ## 🎥 Demo Interaktif
 Lihat sistem berjalan langsung:  
 
-![Demo](assets/demo.gif)  
+![Demo](VID-20250818-WA0002_1(1).gif)  
 
 ---
 
