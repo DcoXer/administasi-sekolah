@@ -36,8 +36,8 @@ Lihat sistem berjalan langsung:
 
 ```bash
 # Clone repo
-git clone https://github.com/username/sistem-administrasi-sekolah.git
-cd sistem-administrasi-sekolah
+git clone https://github.com/DcoXer/administrasi-sekolah.git
+cd administrasi-sekolah
 
 # Install dependencies
 composer install
