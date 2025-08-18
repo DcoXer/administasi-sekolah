@@ -1,84 +1,57 @@
-<div align="center">
-  
-# 🏫 Sistem Administrasi Sekolah  
+# 🎓 Sistem Administrasi Sekolah  
+> Fullstack Web App berbasis **Laravel 10 + TailwindCSS** untuk manajemen administrasi sekolah  
 
-![Banner](https://dummyimage.com/1000x250/111827/38bdf8&text=Sistem+Administrasi+Sekolah)  
-
-📚 Aplikasi modern berbasis **Laravel + TailwindCSS** untuk mempermudah pengelolaan sekolah.  
-✨ Dibuat dengan tampilan **responsive, clean, dan powerful**.  
-
-[![Laravel](https://img.shields.io/badge/Laravel-10-red?logo=laravel)](https://laravel.com/)  
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)  
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
-
-</div>
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
-## 🚀 Deskripsi
+## 📸 Preview
+Tampilan modern & responsif menggunakan **TailwindCSS**.
 
-**Sistem Administrasi Sekolah** adalah platform berbasis web untuk manajemen sekolah:  
-👨‍🎓 Siswa • 👩‍🏫 Guru • 🏫 Kelas • 📊 Laporan  
+![Screenshot](assets/screenshot.png)
 
-Dikembangkan untuk mempermudah administrasi sekolah dengan antarmuka modern dan kinerja cepat.  
+---
 
-💡 Cocok untuk sekolah, lembaga kursus, atau instansi pendidikan.  
+## 🎥 Demo Interaktif
+Lihat sistem berjalan langsung:  
+
+![Demo](assets/demo.gif)  
 
 ---
 
 ## ✨ Fitur Utama
-
-- 👨‍🎓 **Manajemen Siswa** – tambah, edit, hapus data siswa.  
-- 👩‍🏫 **Manajemen Guru** – kelola data guru & staf.  
-- 🏫 **Kelas & Mata Pelajaran** – atur struktur kelas & jadwal.  
-- 📊 **Laporan Otomatis** – generate laporan akademik/administrasi.  
-- 🔐 **Login Multi-role** – Admin, Guru, Siswa.  
-- 🎨 **UI Modern** – berbasis TailwindCSS.  
-- ⚡ **Performa Cepat** – Laravel + Vite build.  
+- 📚 **Manajemen Data Siswa** (CRUD data siswa & guru)  
+- 🏫 **Manajemen Kelas & Jadwal**  
+- 🧾 **Pencatatan Administrasi & Pembayaran**  
+- 📊 **Dashboard Interaktif** dengan grafik statistik  
+- 🔐 **Autentikasi & Role Management** (Admin, Guru, Siswa)  
+- 📱 **Responsive Layout** (desktop & mobile friendly)  
 
 ---
 
-## 📂 Struktur Folder
+## ⚡ Instalasi
 
 ```bash
-web_porto/
-│── app/                # Core Laravel
-│── database/           # Migrations & Seeders
-│── public/             # Public assets
-│── resources/          # Views + Tailwind
-│── routes/             # Web & API routes
-│── package.json        # Frontend deps
-│── composer.json       # Backend deps
-│── vite.config.js      # Vite config
-└── README.md
+# Clone repo
+git clone https://github.com/username/sistem-administrasi-sekolah.git
+cd sistem-administrasi-sekolah
 
-## 🛠 Setup Installasi
-
-# 1. Clone repositori
-git clone https://github.com/DcoXer/sistem-administrasi.git
-
-# 2. Masuk folder
-cd sistem-administrasi
-
-# 3. Install dependency Laravel
+# Install dependencies
 composer install
-
-# 4. Install dependency frontend
 npm install
 
-# 5. Copy file .env
+# Copy env
 cp .env.example .env
 
-# 6. Generate key aplikasi
+# Generate key
 php artisan key:generate
 
-# 7. Buat database & sesuaikan di .env
-
-# 8. Jalankan migrasi
+# Migrasi database
 php artisan migrate --seed
 
-# 9. Running server lokal
+# Jalankan server
 php artisan serve
-
-# 10. Jalankan frontend
 npm run dev
