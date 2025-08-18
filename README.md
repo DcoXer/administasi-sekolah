@@ -1,80 +1,84 @@
-# 🏫 Sistem Administrasi Sekolah
+<div align="center">
+  
+# 🏫 Sistem Administrasi Sekolah  
 
-<p align="center">
-  <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel Logo" width="100"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind Logo" width="120"/>
-</p>
+![Banner](https://dummyimage.com/1000x250/111827/38bdf8&text=Sistem+Administrasi+Sekolah)  
 
-<p align="center">
-  <b>Sistem Administrasi Sekolah</b><br/>
-  <i>Dibangun dengan Laravel + TailwindCSS + bantuan JavaScript ✨</i>
-</p>
+📚 Aplikasi modern berbasis **Laravel + TailwindCSS** untuk mempermudah pengelolaan sekolah.  
+✨ Dibuat dengan tampilan **responsive, clean, dan powerful**.  
+
+[![Laravel](https://img.shields.io/badge/Laravel-10-red?logo=laravel)](https://laravel.com/)  
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)  
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
+
+</div>
 
 ---
 
-## 📌 Deskripsi
+## 🚀 Deskripsi
 
-**Sistem Administrasi Sekolah** adalah aplikasi berbasis web untuk mengelola kegiatan sekolah secara terpusat.  
-Mulai dari manajemen **siswa, guru, kelas, mata pelajaran, hingga laporan**.  
-Didesain agar **mudah digunakan, responsif, dan scalable** untuk kebutuhan sekolah modern.
+**Sistem Administrasi Sekolah** adalah platform berbasis web untuk manajemen sekolah:  
+👨‍🎓 Siswa • 👩‍🏫 Guru • 🏫 Kelas • 📊 Laporan  
 
-> 💡 Tersedia juga versi **siap pakai** (include domain, hosting, dan instalasi).  
-> Cocok buat sekolah yang pengen langsung jalan tanpa ribet.  
+Dikembangkan untuk mempermudah administrasi sekolah dengan antarmuka modern dan kinerja cepat.  
+
+💡 Cocok untuk sekolah, lembaga kursus, atau instansi pendidikan.  
 
 ---
 
 ## ✨ Fitur Utama
 
-- 👨‍🎓 **Manajemen Siswa** – tambah, edit, hapus, lihat data siswa.
-- 👩‍🏫 **Manajemen Guru** – kelola data guru & staf pengajar.
-- 🏫 **Kelas & Mata Pelajaran** – atur struktur kelas + jadwal pelajaran.
-- 📊 **Laporan** – cetak laporan akademik & administrasi.
-- 🔐 **Autentikasi User** – login multi-role (Admin, Guru, Siswa).
-- 🎨 **UI Modern** – menggunakan TailwindCSS dengan animasi interaktif.
-- ⚡ **Performa Cepat** – full Laravel + Blade + JS ringan.
+- 👨‍🎓 **Manajemen Siswa** – tambah, edit, hapus data siswa.  
+- 👩‍🏫 **Manajemen Guru** – kelola data guru & staf.  
+- 🏫 **Kelas & Mata Pelajaran** – atur struktur kelas & jadwal.  
+- 📊 **Laporan Otomatis** – generate laporan akademik/administrasi.  
+- 🔐 **Login Multi-role** – Admin, Guru, Siswa.  
+- 🎨 **UI Modern** – berbasis TailwindCSS.  
+- ⚡ **Performa Cepat** – Laravel + Vite build.  
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
-
-- [Laravel](https://laravel.com/) – Backend Framework (PHP)
-- [TailwindCSS](https://tailwindcss.com/) – Styling modern & responsive
-- [MySQL](https://www.mysql.com/) – Database
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Interaktivitas tambahan
-
----
-
-## 🚀 Panduan Instalasi
-
-Ikuti langkah-langkah berikut untuk menjalankan project ini di lokal:
+## 📂 Struktur Folder
 
 ```bash
+web_porto/
+│── app/                # Core Laravel
+│── database/           # Migrations & Seeders
+│── public/             # Public assets
+│── resources/          # Views + Tailwind
+│── routes/             # Web & API routes
+│── package.json        # Frontend deps
+│── composer.json       # Backend deps
+│── vite.config.js      # Vite config
+└── README.md
+
+## 🛠 Setup Installasi
+
 # 1. Clone repositori
-git clone https://github.com/username/repo-name.git
+git clone https://github.com/DcoXer/sistem-administrasi.git
 
-# 2. Masuk ke folder project
-cd repo-name
+# 2. Masuk folder
+cd sistem-administrasi
 
-# 3. Install dependency PHP (Laravel)
+# 3. Install dependency Laravel
 composer install
 
-# 4. Install dependency frontend (Tailwind + Vite)
+# 4. Install dependency frontend
 npm install
 
-# 5. Copy file environment
+# 5. Copy file .env
 cp .env.example .env
 
 # 6. Generate key aplikasi
 php artisan key:generate
 
-# 7. Buat database di MySQL
-# lalu atur konfigurasi DB di file .env
+# 7. Buat database & sesuaikan di .env
 
 # 8. Jalankan migrasi
 php artisan migrate --seed
 
-# 9. Jalankan server lokal
+# 9. Running server lokal
 php artisan serve
 
-# 10. Jalankan build frontend
+# 10. Jalankan frontend
 npm run dev
