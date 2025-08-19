@@ -23,6 +23,7 @@
                         <tr class="text-center text-gray-700 font-medium">
                             <th class="px-4 py-3">No</th>
                             <th class="px-4 py-3">Nama Siswa</th>
+                            <th class="px-4 py-3">Tanggal Bayar</th>
                             <th class="px-4 py-3">Tahun Ajaran</th>
                             <th class="px-4 py-3">Bulan</th>
                             <th class="px-4 py-3">Jumlah Uang</th>
@@ -35,6 +36,7 @@
                         <tr>
                             <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $item->siswa->nama ?? 'Tidak ditemukan' }}</td>
+                            <td class="px-4 py-2 text-center">{{ $item->tanggal_bayar }}</td>
                             <td class="px-4 py-2 text-center">{{ $item->tahun }}</td>
                             <td class="px-4 py-2 text-center">{{ $item->bulan }}</td>
                             <td class="px-4 py-2 text-center">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>

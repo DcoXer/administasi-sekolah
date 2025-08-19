@@ -21,20 +21,8 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard Role Based
-    Route::get('/dashboard', function () {
-        $user = Auth::user();
-
-        if ($user->role === 'operator') {
-            return view('dashboard.operator');
-        } elseif ($user->role === 'kepala_sekolah') {
-            return view('dashboard.kepala');
-        } elseif ($user->role === 'staff_keuangan') {
-            return view('dashboard.keuangan');
-        } else {
-            abort(403); // Role tidak dikenal
-        }
-    })->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

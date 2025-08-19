@@ -1,120 +1,215 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 id="headerTitle" class="text-3xl font-extrabold text-gray-800 tracking-tight opacity-0 translate-x-[-50px]">
-            🎯 Dashboard Sekolah
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <!-- ✅ GSAP + VanillaTilt CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.3/vanilla-tilt.min.js"></script>
+    <style>
+        /* 🌊 Liquid Background Soft */
+        body {
+            background: radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
+                radial-gradient(at 70% 70%, #f9a8d4, transparent 60%),
+                radial-gradient(at 50% 90%, #93c5fd, transparent 60%),
+                #fdfdfd;
+            background-attachment: fixed;
+        }
 
-    <div class="py-10 bg-gray-50 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+        /* ✨ Liquid Card (Glassmorphism vibes) */
+        .liquid-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.15));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
 
-            <!-- ✅ Profile Card -->
-            <div id="profileCard" class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 opacity-0 translate-y-6 transform">
-                <div class="flex items-center space-x-4">
-                    <img src="https://i.pravatar.cc/80?img=5" class="w-16 h-16 rounded-full border border-gray-200 shadow-md">
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800">Halo, {{ Auth::user()->name }}</h3>
-                        <p class="text-gray-600 text-sm">Peran Anda:
-                            <span class="px-2 py-0.5 text-xs rounded bg-indigo-100 text-indigo-700 font-semibold">
-                                {{ strtoupper(Auth::user()->role) }}
-                            </span>
-                        </p>
-                    </div>
+        .liquid-card:hover {
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ✨ Animasi fade-in umum */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* ✨ Bisa dipakai cascade (delay sedikit biar ga bareng semua) */
+        .fade-in.delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in.delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .fade-in.delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+            <!-- 👋 Welcome Card -->
+            <div class="liquid-card flex items-center justify-between fade-in delay-1">
+                <div>
+                    <h3 class="text-sm font-medium text-gray-600">Halo,</h3>
+                    <p class="text-lg font-bold text-gray-900">{{ $user->name ?? 'User' }}</p>
+                    <p class="text-xs text-gray-500 mt-1">Role: {{ $user->role ?? '-' }}</p>
                 </div>
+                <img src="{{ Auth::user()->profile_photo ? asset('storage/profile/' . Auth::user()->profile_photo) : asset('default-avatar.png') }}"
+                    class="w-9 h-9 rounded-full border border-white/40 shadow-md object-cover">
             </div>
 
-            <!-- ✅ Grid Menu dengan Tilt -->
-            <div id="dashboardCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0">
-
-                <!-- Card -->
-                <a href="{{ route('siswa.index') }}" class="dashboard-card group bg-white p-6 rounded-xl shadow-xl border border-gray-100 hover:shadow-2xl transition-transform duration-500" data-tilt data-tilt-max="12" data-tilt-speed="400">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <svg class="w-8 h-8 text-blue-600 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                        </svg>
-                        <h3 class="text-xl font-semibold text-blue-700">Manajemen Siswa</h3>
+            <!-- 📊 Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in delay-2">
+                <div class="liquid-card flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-medium text-green-600">Total Siswa</h3>
+                        <p class="text-lg font-bold text-green-800">
+                            {{ $totalSiswa ?? 0 }} siswa
+                        </p>
                     </div>
-                    <p class="text-gray-600">Kelola data siswa dengan UI interaktif dan filter canggih.</p>
-                </a>
+                    <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17 20h5V4H2v16h5m10 0V4m0 16a3 3 0 01-6 0m6 0a3 3 0 106 0" />
+                    </svg>
+                </div>
 
-                <!-- Card lainnya sama konsep -->
-                <a href="{{ route('guru.index') }}" class="dashboard-card group bg-white p-6 rounded-xl shadow-xl border border-gray-100 hover:shadow-2xl transition-transform duration-500" data-tilt data-tilt-max="12" data-tilt-speed="400">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <svg class="w-8 h-8 text-green-600 group-hover:scale-125 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 19V7a2 2 0 012-2h12a2 2 0 012 2v12" />
-                        </svg>
-                        <h3 class="text-xl font-semibold text-green-700">Manajemen Guru</h3>
+                @if(($user->role ?? '') === 'staff_keuangan')
+                <div class="liquid-card flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-medium text-indigo-600">Total Daftar Ulang</h3>
+                        <p class="text-lg font-bold text-indigo-800">
+                            Rp {{ number_format($duTotalSudah ?? 0,0,',','.') }}
+                        </p>
                     </div>
-                    <p class="text-gray-600">Tambah dan kelola data guru dengan tampilan elegan.</p>
-                </a>
+                    <svg class="w-10 h-10 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c.47 0 .91-.08 1.32-.24L17 17V7l-3.68 1.24A3.95 3.95 0 0012 8z" />
+                    </svg>
+                </div>
 
-                @if(Auth::user()->role === 'operator')
-                <a href="{{ route('users.index') }}" class="dashboard-card group bg-white p-6 rounded-xl shadow-xl border border-gray-100 hover:shadow-2xl transition-transform duration-500" data-tilt data-tilt-max="12" data-tilt-speed="400">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <svg class="w-8 h-8 text-yellow-600 group-hover:scale-125 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5z" />
-                        </svg>
-                        <h3 class="text-xl font-semibold text-yellow-700">Manajemen User</h3>
+                <div class="liquid-card flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-medium text-blue-600">Total SPP Masuk</h3>
+                        <p class="text-lg font-bold text-blue-800">
+                            Rp {{ number_format($sppTotalSudah ?? 0,0,',','.') }}
+                        </p>
                     </div>
-                    <p class="text-gray-600">Kelola akun pengguna sistem sekolah.</p>
-                </a>
+                    <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c.47 0 .91-.08 1.32-.24L17 17V7l-3.68 1.24A3.95 3.95 0 0012 8z" />
+                    </svg>
+                </div>
                 @endif
+            </div>
 
-                @if(Auth::user()->role === 'staff_keuangan')
-                <a href="{{ route('keuangan.index') }}" class="dashboard-card group bg-white p-6 rounded-xl shadow-xl border border-gray-100 hover:shadow-2xl transition-transform duration-500" data-tilt data-tilt-max="12" data-tilt-speed="400">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <svg class="w-8 h-8 text-purple-600 group-hover:scale-125 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 8c-3.8 0-7 1.8-7 4v2c0 2.2 3.1 4 7 4s7-1.8 7-4v-2c0-2.2-3.1-4-7-4z" />
-                        </svg>
-                        <h3 class="text-xl font-semibold text-purple-700">Keuangan Sekolah</h3>
-                    </div>
-                    <p class="text-gray-600">Pantau transaksi dan laporan keuangan sekolah.</p>
-                </a>
+            <!-- 📈 Grafik Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 fade-in delay-3">
+
+                <!-- Grafik Jumlah Siswa (Selalu tampil) -->
+                <div class="liquid-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Jumlah Siswa per Kelas</h3>
+                    <canvas id="siswaChart"></canvas>
+                </div>
+
+                @if(($user->role ?? '') === 'staff_keuangan')
+                <!-- Grafik Daftar Ulang -->
+                <div class="liquid-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Daftar Ulang</h3>
+                    <canvas id="duChart"></canvas>
+                </div>
+
+                <!-- Grafik SPP -->
+                <div class="liquid-card">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Pembayaran SPP</h3>
+                    <canvas id="sppChart"></canvas>
+                </div>
                 @endif
-
             </div>
         </div>
     </div>
 
-    <!-- ✅ GSAP + Tilt Init -->
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            gsap.timeline()
-                .to("#headerTitle", {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.7,
-                    ease: "power3.out"
-                })
-                .to("#profileCard", {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    ease: "power3.out"
-                }, "-=0.3")
-                .to("#dashboardCards", {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power2.out"
-                }, "-=0.3")
-                .from(".dashboard-card", {
-                    y: 40,
-                    opacity: 0,
-                    scale: 0.9,
-                    stagger: 0.15,
-                    ease: "back.out(1.7)",
-                    duration: 0.6
-                }, "-=0.2");
-
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                scale: 1.05,
-                glare: true,
-                "max-glare": 0.2
+        document.addEventListener("DOMContentLoaded", function() {
+            // Jumlah Siswa (Selalu tampil)
+            new Chart(document.getElementById('siswaChart'), {
+                type: 'bar',
+                data: {
+                    labels: @json(array_keys($siswaPerKelas ?? [])),
+                    datasets: [{
+                        label: 'Jumlah Siswa',
+                        data: @json(array_values($siswaPerKelas ?? [])),
+                        backgroundColor: 'rgba(139, 92, 246, 0.6)',
+                        borderRadius: 8,
+                        barThickness: 30
+                    }]
+                }
             });
+
+            @if(($user -> role ?? '') === 'staff_keuangan')
+            // Grafik Daftar Ulang
+            new Chart(document.getElementById('duChart'), {
+                type: 'line',
+                data: {
+                    labels: @json($duChart -> pluck('status') ?? []),
+                    datasets: [{
+                        label: 'Jumlah Siswa',
+                        data: @json($duChart -> pluck('nominal') ?? []),
+                        borderColor: '#34d399',
+                        backgroundColor: 'rgba(52, 211, 153, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#34d399'
+                    }]
+                }
+            });
+
+            // Grafik SPP
+            new Chart(document.getElementById('sppChart'), {
+                type: 'line',
+                data: {
+                    labels: @json($sppLabels ?? []),
+                    datasets: [{
+                        label: 'Total Bayar (Rp)',
+                        data: @json($sppData ?? []),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#3b82f6'
+                    }]
+                }
+            });
+            @endif
         });
     </script>
 </x-app-layout>
