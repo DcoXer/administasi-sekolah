@@ -26,7 +26,7 @@
         Sistem Administrasi Sekolah
     </a>
 
-    <!-- 👤 User -->
+    <!-- User -->
     <div class="relative" @click.away="userMenu=false">
         <button @click="userMenu = !userMenu" class="flex items-center gap-2 px-2 md:px-3 py-1 rounded-full hover:bg-white/30 transition">
             <img src="{{ Auth::user()->profile_photo ? asset('storage/profile/' . Auth::user()->profile_photo) : asset('default-avatar.png') }}"

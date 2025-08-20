@@ -14,8 +14,8 @@ use App\Models\PembayaranSpp;
 use App\Livewire\UserManagement;
 
 Route::get('/', function () {
-    return redirect('/dashboard');
-});
+    return view('welcome');
+})->name('welcome');
 
 require __DIR__ . '/auth.php';
 

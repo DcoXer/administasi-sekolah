@@ -5,70 +5,10 @@
         </h2>
     </x-slot>
 
-    <style>
-        /* 🌊 Liquid Background Soft */
-        body {
-            background: radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
-                radial-gradient(at 70% 70%, #f9a8d4, transparent 60%),
-                radial-gradient(at 50% 90%, #93c5fd, transparent 60%),
-                #fdfdfd;
-            background-attachment: fixed;
-        }
-
-        /* ✨ Liquid Card (Glassmorphism vibes) */
-        .liquid-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.15));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 1.5rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-        }
-
-        .liquid-card:hover {
-            transform: translateY(-6px) scale(1.015);
-            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ✨ Animasi fade-in umum */
-        .fade-in {
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        /* ✨ Bisa dipakai cascade (delay sedikit biar ga bareng semua) */
-        .fade-in.delay-1 {
-            animation-delay: 0.2s;
-        }
-
-        .fade-in.delay-2 {
-            animation-delay: 0.4s;
-        }
-
-        .fade-in.delay-3 {
-            animation-delay: 0.6s;
-        }
-    </style>
-
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-            <!-- 👋 Welcome Card -->
+            <!-- Welcome Card -->
             <div class="liquid-card flex items-center justify-between fade-in delay-1">
                 <div>
                     <h3 class="text-sm font-medium text-gray-600">Halo,</h3>
@@ -79,13 +19,13 @@
                     class="w-9 h-9 rounded-full border border-white/40 shadow-md object-cover">
             </div>
 
-            <!-- 📊 Summary Cards -->
+            <!-- Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in delay-2">
                 <div class="liquid-card flex items-center justify-between">
                     <div>
                         <h3 class="text-sm font-medium text-green-600">Total Siswa</h3>
                         <p class="text-lg font-bold text-green-800">
-                            {{ $totalSiswa ?? 0 }} siswa
+                            {{ $totalSiswa ?? '' }} siswa
                         </p>
                     </div>
                     <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
@@ -126,7 +66,7 @@
                 @endif
             </div>
 
-            <!-- 📈 Grafik Section -->
+            <!-- Grafik Section -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 fade-in delay-3">
 
                 <!-- Grafik Jumlah Siswa (Selalu tampil) -->
