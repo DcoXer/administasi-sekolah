@@ -11,9 +11,7 @@ class UpdateProfile extends Component
 {
     use WithFileUploads;
 
-    public $name;
-    public $email;
-    public $photo;
+    public $name, $email, $photo;
 
     public function mount()
     {
@@ -29,11 +27,12 @@ class UpdateProfile extends Component
         $this->validate([
             'name'  => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'nullable|image|max:2048',
         ]);
 
-        // ✅ Simpan foto jika ada
+        // simpan foto baru kalau ada
         if ($this->photo) {
+            // hapus foto lama
             if ($user->profile_photo && Storage::exists('public/profile/' . $user->profile_photo)) {
                 Storage::delete('public/profile/' . $user->profile_photo);
             }

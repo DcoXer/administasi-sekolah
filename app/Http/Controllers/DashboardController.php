@@ -40,10 +40,10 @@ class DashboardController extends Controller
             $sppTotalSudah = PembayaranSpp::where('status', 'sudah')->sum('jumlah');
 
             // Ambil data per bulan (isi semua 12 bulan, kalau ga ada → nol)
-            $sppPerBulanRaw = PembayaranSpp::selectRaw('MONTH(tanggal_bayar) as bulan, SUM(jumlah) as total')
+            $sppPerBulanRaw = PembayaranSpp::selectRaw('EXTRACT(MONTH from tanggal_bayar) as bulan, SUM(jumlah) as total')
                 ->where('status', 'sudah')
-                ->groupByRaw('MONTH(tanggal_bayar)')
-                ->orderByRaw('MONTH(tanggal_bayar)')
+                ->groupByRaw('EXTRACT(MONTH from tanggal_bayar)')
+                ->orderByRaw('EXTRACT(MONTH from tanggal_bayar)')
                 ->pluck('total', 'bulan');
 
             // Generate data 12 bulan biar ga bolong

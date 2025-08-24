@@ -1,5 +1,6 @@
 <x-app-layout>
-    <div class="py-8 bg-gray-50 min-h-screen">
+    <div class="max-w-xl mx-auto mt-6 space-y-6">
+        {{-- Livewire Form --}}
         @livewire('profile.update-profile')
     </div>
 </x-app-layout>

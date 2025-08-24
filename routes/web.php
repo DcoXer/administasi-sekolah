@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UpdateProfile;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GuruController;
@@ -76,3 +77,5 @@ Route::middleware(['auth'])->group(function () {
 // Public routes (tanpa auth)
 Route::get('/daftar-siswa', [SiswaController::class, 'publicIndex'])->name('siswa.public');
 Route::get('/daftar-guru', [GuruController::class, 'publicIndex'])->name('guru.public');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
