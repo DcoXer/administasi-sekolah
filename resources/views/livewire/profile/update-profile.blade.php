@@ -1,5 +1,5 @@
-<div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6">
-    <h2 class="text-xl font-semibold mb-4">Update Profil</h2>
+<div class="max-w-lg mx-auto liquid-table p-6">
+    <h2 class="text-xl text-center font-bold mb-4">Update Profil</h2>
 
     @if (session('success'))
     <div class="mb-4 p-3 text-green-800 bg-green-100 rounded">
@@ -38,9 +38,10 @@
         </div>
 
         {{-- Tombol --}}
-        <div>
+        <div class="justify-between flex">
+            <x-back-button/>
             <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                class="bg-blue-600 text-white px-6 py-3 rounded-2xl hover:bg-blue-700">
                 Simpan
             </button>
         </div>

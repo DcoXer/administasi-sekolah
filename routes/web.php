@@ -59,10 +59,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
     Route::prefix('keuangan')->middleware(['checkrole:staff_keuangan'])->group(function () {
         Route::get('/dashboard', [KeuanganController::class, 'index'])->name('keuangan.dashboard');
-        Route::resource('pembayaran-spp', PembayaranSppController::class);
-        Route::resource('daftar-ulang', PembayaranDaftarUlangController::class);
+        Route::resource('pembayaran-spp', PembayaranSppController::class)->except(['show']);
+        Route::resource('daftar-ulang', PembayaranDaftarUlangController::class)->except(['show']);
         Route::get('/keuangan/spp/preview-spp/{id}', [PembayaranSppController::class, 'preview'])->name('pembayaran-spp.preview');
         Route::get('/keuangan/spp/download-spp/{id}', [PembayaranSppController::class, 'download'])->name('pembayaran-spp.download');
+        Route::get('/pembayaran-spp/export', [PembayaranSppController::class, 'export'])->name('pembayaran-spp.export');
+        Route::get('/pembayaran-spp/import', [PembayaranSppController::class, 'import'])->name('pembayaran-spp.import');
         Route::get('/keuangan/spp/preview-daftar-ulang/{id}', [PembayaranDaftarUlangController::class, 'preview'])->name('daftar-ulang.preview');
         Route::get('/keuangan/spp/download-daftar-ulang/{id}', [PembayaranDaftarUlangController::class, 'download'])->name('daftar-ulang.download');
         Route::get('/pembayaran-daftar-ulang/export', [PembayaranDaftarUlangController::class, 'export'])->name('daftar-ulang.export');

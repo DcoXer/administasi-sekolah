@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-4xl mx-auto p-6 mt-10 bg-white rounded-2xl shadow">
+    <div class="max-w-4xl mx-auto p-6 mt-10 liquid-table">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Tambah Pembayaran SPP</h2>
             <a href="{{ route('pembayaran-spp.index') }}" class="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-800 transition">

@@ -1,14 +1,13 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-2xl font-semibold text-gray-800">Input Pembayaran Daftar Ulang</h2>
-    </x-slot>
+    <div class="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8 liquid-table">
 
-    <div class="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <form method="POST" action="{{ route('daftar-ulang.store') }}"
             x-data="{ isSubmitting: false }" @submit="isSubmitting = true"
-            class="bg-white p-6 rounded-2xl shadow-md space-y-6">
+            class="p-6 space-y-6">
             @csrf
-
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center border-b pb-4">
+                Tambah Data Pembayaran Daftar Ulang
+            </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- Dropdown Kelas -->

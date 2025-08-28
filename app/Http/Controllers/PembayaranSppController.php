@@ -7,6 +7,9 @@ use App\Models\PembayaranSpp;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Helpers\QrCodeHelper;
+use App\Exports\PembayaranSppExport;
+use App\Imports\PembayaranSppImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PembayaranSppController extends Controller
 {
@@ -113,5 +116,21 @@ class PembayaranSppController extends Controller
             ->setPaper('A4', 'landscape');
 
         return $pdf->download('bukti-pembayaran-spp-' . $buktiSpp->siswa->nama . '.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PembayaranSppExport, 'pembayaran_spp.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        Excel::import(new PembayaranSppImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data Pembayaran SPP berhasil diimport!');
     }
 }

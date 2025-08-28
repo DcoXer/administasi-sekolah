@@ -1,12 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-2xl font-semibold text-gray-800 leading-tight">
-            Edit Data Guru
-        </h2>
-    </x-slot>
-
     <div class="py-6">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 bg-white p-6 shadow-md rounded">
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 liquid-table">
+            <h1 class="text-2xl text-gray-700 font-bold mb-4 pb-4">Edit Data Guru</h1>
 
             @if ($errors->any())
             <div class="mb-4 bg-red-100 text-red-700 p-4 rounded">
@@ -56,8 +51,9 @@
                     <input type="text" name="no_hp" value="{{ $guru->no_hp }}" class="w-full border rounded px-3 py-2">
                 </div>
 
-                <div class="text-right">
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded transition">
+                <div class="flex justify-between">
+                    <x-back-button/>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
                         Update
                     </button>
                 </div>

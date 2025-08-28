@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-6">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 bg-white p-6 shadow-md rounded">
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 liquid-table">
 
             @if ($errors->any())
             <div class="mb-4 bg-red-100 text-red-700 p-4 rounded">

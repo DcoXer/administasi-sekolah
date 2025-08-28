@@ -16,11 +16,6 @@ class FilterSiswaTable extends Component
     protected $paginationTheme = 'tailwind';
     protected $updatesQueryString = ['search', 'kelas', 'page'];
 
-    // Reset pagination saat search/filter berubah
-    public function updatedSearch()
-    {
-        $this->dispatch('$refresh');
-    }
     public function updatingSearch($value)
     {
         $this->resetPage();
