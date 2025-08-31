@@ -34,6 +34,19 @@
                             d="M17 20h5V4H2v16h5m10 0V4m0 16a3 3 0 01-6 0m6 0a3 3 0 106 0" />
                     </svg>
                 </div>
+                <div class="liquid-card flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-medium text-green-600">Total Guru</h3>
+                        <p class="text-lg font-bold text-green-800">
+                            {{ $totalGuru ?? '' }} Guru
+                        </p>
+                    </div>
+                    <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17 20h5V4H2v16h5m10 0V4m0 16a3 3 0 01-6 0m6 0a3 3 0 106 0" />
+                    </svg>
+                </div>
 
                 @if(($user->role ?? '') === 'staff_keuangan')
                 <div class="liquid-card flex items-center justify-between">
@@ -69,26 +82,95 @@
             <!-- Grafik Section -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 fade-in delay-3">
 
-                <!-- Grafik Jumlah Siswa (Selalu tampil) -->
-                <div class="liquid-card">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4">Jumlah Siswa per Kelas</h3>
-                    <canvas id="siswaChart"></canvas>
-                </div>
-
+                {{-- Staff Keuangan --}}
                 @if(($user->role ?? '') === 'staff_keuangan')
                 <!-- Grafik Daftar Ulang -->
-                <div class="liquid-card">
+                <div class="liquid-card md:col-span-1">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Daftar Ulang</h3>
-                    <canvas id="duChart"></canvas>
+                    <canvas id="duChart" class="w-full h-64"></canvas>
                 </div>
 
                 <!-- Grafik SPP -->
-                <div class="liquid-card">
+                <div class="liquid-card md:col-span-1">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Pembayaran SPP</h3>
-                    <canvas id="sppChart"></canvas>
+                    <canvas id="sppChart" class="w-full h-64"></canvas>
+                </div>
+                @endif
+
+                {{-- Operator --}}
+                @if(($user->role ?? '') === 'operator')
+                <!-- Bagian Siswa -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full lg:col-span-3">
+
+                    <!-- ✅ Tabel Jumlah Siswa -->
+                    <div class="liquid-card overflow-x-auto lg:col-span-2">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Tabel Jumlah Siswa per Kelas</h3>
+                        <table class="min-w-full text-sm text-gray-900">
+                            <thead class="text-gray-600 text-center border-b">
+                                <tr>
+                                    <th class="px-4 py-3">Kelas</th>
+                                    <th class="px-4 py-3">Jumlah Siswa</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-center">
+                                @forelse($jumlahSiswa ?? [] as $kelas => $total)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-2 font-semibold">{{ $kelas }}</td>
+                                    <td class="px-4 py-2">{{ $total }}</td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="2" class="text-gray-500 py-3">Data siswa tidak tersedia.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ✅ Grafik Jumlah Siswa -->
+                    <div class="liquid-card">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Jumlah Siswa per Kelas</h3>
+                        <canvas id="siswaChart" class="w-full h-64"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bagian Guru -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full lg:col-span-3 mt-6">
+
+                    <!-- ✅ Tabel Jumlah Guru -->
+                    <div class="liquid-card overflow-x-auto lg:col-span-2">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Tabel Jumlah Guru per Mapel</h3>
+                        <table class="min-w-full text-sm text-gray-900">
+                            <thead class="text-gray-600 text-center border-b">
+                                <tr>
+                                    <th class="px-4 py-3">Mata Pelajaran</th>
+                                    <th class="px-4 py-3">Jumlah Guru</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-center">
+                                @forelse($jumlahGuru ?? [] as $mapel => $total)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-2 font-semibold">{{ $mapel }}</td>
+                                    <td class="px-4 py-2">{{ $total }}</td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="2" class="text-gray-500 py-3">Data guru tidak tersedia.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ✅ Grafik Jumlah Guru -->
+                    <div class="liquid-card">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Jumlah Guru per Mapel</h3>
+                        <canvas id="guruChart" class="w-full h-64"></canvas>
+                    </div>
                 </div>
                 @endif
             </div>
+
         </div>
     </div>
 
@@ -96,23 +178,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Jumlah Siswa (Selalu tampil)
-            new Chart(document.getElementById('siswaChart'), {
-                type: 'bar',
-                data: {
-                    labels: @json(array_keys($siswaPerKelas ?? [])),
-                    datasets: [{
-                        label: 'Jumlah Siswa',
-                        data: @json(array_values($siswaPerKelas ?? [])),
-                        backgroundColor: 'rgba(139, 92, 246, 0.6)',
-                        borderRadius: 8,
-                        barThickness: 30
-                    }]
-                }
-            });
 
+            // ==================== STAFF KEUANGAN ====================
             @if(($user -> role ?? '') === 'staff_keuangan')
-            // Grafik Daftar Ulang
+            // Grafik Daftar Ulang (Line Chart)
             new Chart(document.getElementById('duChart'), {
                 type: 'line',
                 data: {
@@ -124,32 +193,124 @@
                         backgroundColor: 'rgba(52, 211, 153, 0.2)',
                         fill: true,
                         tension: 0.4,
-                        borderWidth: 2,
-                        pointRadius: 4,
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointHoverRadius: 8,
                         pointBackgroundColor: '#34d399'
                     }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#065f46'
+                            }
+                        }
+                    }
                 }
             });
 
-            // Grafik SPP
+            // Grafik SPP (Bar Chart → biar beda)
             new Chart(document.getElementById('sppChart'), {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: @json($sppLabels ?? []),
                     datasets: [{
-                        label: 'Total Bayar (Rp)',
+                        label: 'Total Setiap Bulan',
                         data: @json($sppData ?? []),
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
                         borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                        fill: true,
-                        tension: 0.4,
-                        borderWidth: 2,
-                        pointRadius: 4,
-                        pointBackgroundColor: '#3b82f6'
+                        borderWidth: 1,
+                        borderRadius: 6
                     }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1200,
+                        easing: 'easeOutBounce'
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            @endif
+
+            // ==================== OPERATOR ====================
+            @if(($user -> role ?? '') === 'operator')
+            // Grafik Jumlah Siswa per Kelas (Area Chart/Line with fill)
+            new Chart(document.getElementById('siswaChart'), {
+                type: 'line',
+                data: {
+                    labels: @json(array_keys($jumlahSiswa ?? [])),
+                    datasets: [{
+                        label: 'Jumlah Siswa',
+                        data: @json(array_values($jumlahSiswa ?? [])),
+                        fill: true,
+                        backgroundColor: 'rgba(99, 102, 241, 0.3)',
+                        borderColor: '#6366f1',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        pointRadius: 5,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#6366f1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1800,
+                        easing: 'easeInOutCubic'
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#312e81'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Grafik Jumlah Guru per Mapel (Doughnut Chart)
+            new Chart(document.getElementById('guruChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: @json(array_keys($jumlahGuru ?? [])),
+                    datasets: [{
+                        label: 'Jumlah Guru',
+                        data: @json(array_values($jumlahGuru ?? [])),
+                        backgroundColor: [
+                            '#3b82f6', '#10b981', '#f59e0b', '#ef4444',
+                            '#8b5cf6', '#ec4899', '#14b8a6'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 1500,
+                        easing: 'easeOutElastic'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
                 }
             });
             @endif
         });
     </script>
+
 </x-app-layout>
