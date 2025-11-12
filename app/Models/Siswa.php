@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Model
-{
+class Siswa extends Model{
     use HasFactory;
 
     protected $fillable = [
@@ -26,5 +25,15 @@ class Siswa extends Model
     public function daftarUlang()
     {
         return $this->hasMany(PembayaranDaftarUlang::class);
+    }
+
+    public function nilaiSiswa()
+    {
+        return $this->hasMany(NilaiSiswa::class);
+    }
+
+    public function raports()
+    {
+        return $this->hasMany(Raport::class);
     }
 }

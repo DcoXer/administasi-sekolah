@@ -11,7 +11,10 @@ use App\Http\Controllers\{
     PembayaranDaftarUlangController,
     PembayaranSppController,
     MutasiSiswaController,
-    PersetujuanMutasiController
+    PersetujuanMutasiController,
+    BidangStudiController,
+    NilaiController,
+    RaportController
 };
 use App\Livewire\{
     MutasiSiswaIndex,
@@ -102,6 +105,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Livewire Approval Mutasi
         Route::get('/mutasi-approval', MutasiApproval::class)->name('mutasi.approval');
+
+        // Bidang Studi Management
+        Route::resource('bidang-studi', BidangStudiController::class);
     });
 
     // --------------------
@@ -123,6 +129,28 @@ Route::middleware(['auth'])->group(function () {
         Route::get('daftar-ulang/download/{id}', [PembayaranDaftarUlangController::class, 'download'])->name('daftar-ulang.download');
         Route::get('daftar-ulang/export', [PembayaranDaftarUlangController::class, 'export'])->name('daftar-ulang.export');
         Route::get('daftar-ulang/import', [PembayaranSppController::class, 'import'])->name('daftar-ulang.import');
+    });
+
+    // --------------------
+    // Role: Guru Bidang & Wali Kelas
+    // --------------------
+    Route::prefix('nilai')->middleware(['checkrole:guru'])->group(function () {
+        Route::get('/', [NilaiController::class, 'index'])->name('nilai.index');
+        Route::get('/{guruBidangId}/input', [NilaiController::class, 'inputNilai'])->name('nilai.input');
+        Route::post('/{guruBidangId}', [NilaiController::class, 'storeNilai'])->name('nilai.store');
+        Route::get('/{nilaiId}/edit', [NilaiController::class, 'editNilai'])->name('nilai.edit');
+        Route::put('/{nilaiId}', [NilaiController::class, 'updateNilai'])->name('nilai.update');
+    });
+
+    Route::prefix('raport')->middleware(['checkrole:guru'])->group(function () {
+        Route::get('/', [RaportController::class, 'index'])->name('raport.index');
+        Route::get('/create', [RaportController::class, 'create'])->name('raport.create');
+        Route::post('/', [RaportController::class, 'store'])->name('raport.store');
+        Route::get('/{raport}', [RaportController::class, 'show'])->name('raport.show');
+        Route::get('/{raport}/edit', [RaportController::class, 'edit'])->name('raport.edit');
+        Route::put('/{raport}', [RaportController::class, 'update'])->name('raport.update');
+        Route::get('/{raport}/print', [RaportController::class, 'printPdf'])->name('raport.print');
+        Route::delete('/{raport}', [RaportController::class, 'destroy'])->name('raport.destroy');
     });
 
     // --------------------
