@@ -60,4 +60,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the Guru record associated with this User.
+     * Attempts matching by NIP (email) or name.
+     */
+    public function getGuruRecord()
+    {
+        return Guru::where('nip', $this->email)->orWhere('nama', $this->name)->first();
+    }
 }

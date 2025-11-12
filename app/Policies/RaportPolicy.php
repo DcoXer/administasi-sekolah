@@ -26,7 +26,7 @@ class RaportPolicy
         if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
 
         if ($user->hasAnyRole(['guru_bidang', 'wali_kelas'])) {
-            $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
+            $guru = $user->getGuruRecord();
             if (!$guru) return false;
             // Wali kelas - check wali_kelas_id
             if ($raport->wali_kelas_id && $raport->wali_kelas_id == $guru->id) return true;
@@ -43,8 +43,8 @@ class RaportPolicy
      */
     public function create(User $user): bool
     {
-        // Only wali_kelas or kepala_sekolah can create raports
-        return in_array($user->role, ['wali_kelas', 'kepala_sekolah']);
+        // Only wali_kelas or kepala_madrasah can create raports
+        return $user->hasAnyRole(['wali_kelas', 'kepala_madrasah']);
     }
 
     /**
@@ -52,10 +52,10 @@ class RaportPolicy
      */
     public function update(User $user, Raport $raport): bool
     {
-        // Wali kelas can update their raports; kepala and operator can too
-        if (in_array($user->role, ['kepala_sekolah', 'operator'])) return true;
-        if ($user->role === 'wali_kelas') {
-            $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
+        // Wali kelas can update their raports; kepala_madrasah and operator can too
+        if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
+        if ($user->hasRole('wali_kelas')) {
+            $guru = $user->getGuruRecord();
             if (!$guru) return false;
             return $raport->wali_kelas_id == $guru->id;
         }
@@ -67,8 +67,8 @@ class RaportPolicy
      */
     public function delete(User $user, Raport $raport): bool
     {
-        // Only kepala_sekolah or operator
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        // Only kepala_madrasah or operator
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 
     /**
@@ -76,7 +76,7 @@ class RaportPolicy
      */
     public function restore(User $user, Raport $raport): bool
     {
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 
     /**
@@ -84,6 +84,6 @@ class RaportPolicy
      */
     public function forceDelete(User $user, Raport $raport): bool
     {
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 }

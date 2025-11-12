@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
-    // Guru can input grades for their subjects
+    // Guru bidang can input grades for their subjects
     public function index()
     {
+        $this->authorize('viewAny', NilaiSiswa::class);
+        
         $user = auth()->user();
-        $guru = Guru::where('nip', $user->email)->first() ?? Guru::where('nama', $user->name)->first();
+        $guru = $user->getGuruRecord();
 
         if (!$guru) {
             return redirect()->back()->with('error', 'Guru tidak ditemukan');
@@ -43,6 +45,8 @@ class NilaiController extends Controller
     public function storeNilai(Request $request, $guruBidangId)
     {
         $this->authorize('create', NilaiSiswa::class);
+
+        $guruBidangId = (int) $guruBidangId;
 
         $validated = $request->validate([
             'nilai.*.siswa_id' => 'required|exists:siswas,id',

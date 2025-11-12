@@ -22,12 +22,11 @@ class NilaiPolicy
      */
     public function view(User $user, NilaiSiswa $nilaiSiswa): bool
     {
-        // Guru who teaches this subject or kepala_sekolah can view
+        // Guru_bidang who teaches this subject or kepala_madrasah can view
         if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
 
         if ($user->hasRole('guru_bidang')) {
-            // match guru by name or NIP (simple heuristic)
-            $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
+            $guru = $user->getGuruRecord();
             if (!$guru) return false;
             return $nilaiSiswa->guruBidang->guru_id === $guru->id;
         }
@@ -49,10 +48,10 @@ class NilaiPolicy
      */
     public function update(User $user, NilaiSiswa $nilaiSiswa): bool
     {
-        if ($user->role === 'kepala_sekolah' || $user->role === 'operator') return true;
+        if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
 
-        if ($user->role === 'guru') {
-            $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
+        if ($user->hasRole('guru_bidang')) {
+            $guru = $user->getGuruRecord();
             if (!$guru) return false;
             return $nilaiSiswa->guruBidang->guru_id === $guru->id;
         }
@@ -74,7 +73,7 @@ class NilaiPolicy
      */
     public function restore(User $user, NilaiSiswa $nilaiSiswa): bool
     {
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 
     /**
@@ -82,6 +81,6 @@ class NilaiPolicy
      */
     public function forceDelete(User $user, NilaiSiswa $nilaiSiswa): bool
     {
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 }

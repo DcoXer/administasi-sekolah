@@ -17,7 +17,7 @@ class RaportController extends Controller
         $this->authorize('viewAny', Raport::class);
 
         $user = auth()->user();
-        $guru = Guru::where('nip', $user->email)->first() ?? Guru::where('nama', $user->name)->first();
+        $guru = $user->getGuruRecord();
 
         if (!$guru) {
             return redirect()->back()->with('error', 'Guru tidak ditemukan');
