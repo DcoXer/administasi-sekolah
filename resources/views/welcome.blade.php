@@ -66,7 +66,7 @@
                 </div>
                 <!-- Menu tengah -->
                 <nav class="hidden md:flex items-center gap-8 text-gray-700 font-medium">
-                    <a href="#home" class="hover:text-blue-600 transition">Home</a>
+                    <a href="#home" class="hover:text-blue-600 transition">Dashboard</a>
                     <a href="#about" class="hover:text-blue-600 transition">About</a>
                     <a href="#kontak" class="hover:text-blue-600 transition">Kontak</a>
                     <a href="#informasi" class="hover:text-blue-600 transition">Informasi</a>
@@ -94,7 +94,7 @@
 
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden flex-col gap-3 pt-3 bg-gray-50 font-semibold">
-                <a href="#home" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Home</a>
+                <a href="#home" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Dashboard</a>
                 <a href="#about" class="block px-3 py-2 rounded-lg hover:bg-gray-100">About</a>
                 <a href="#kontak" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Kontak</a>
                 <a href="#informasi" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Informasi</a>
@@ -108,7 +108,7 @@
 
     <!-- ===== Mega Card (hampir full screen) ===== -->
     <main class="flex-1 px-4 sm:px-6 lg:px-8 pb-10">
-        {{-- Home Section --}}
+        {{-- Dashboard Section --}}
         <section class="mx-auto max-w-[1400px] mb-12" id="home">
             <div
                 class="mega-card rounded-3xl p-6 sm:p-8 lg:p-12 min-h-[82vh] flex flex-col gap-8" data-reveal="up">

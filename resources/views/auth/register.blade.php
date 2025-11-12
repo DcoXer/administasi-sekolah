@@ -1,137 +1,60 @@
 <x-guest-layout>
-    <div class="min-h-screen flex flex-col md:flex-row">
-        {{-- Kiri - Gambar --}}
-        <div class="hidden md:flex w-1/2 bg-blue-100 items-center justify-center">
-            <img
-                src="{{ asset('images/school.jpg') }}"
-                alt="Register Illustration"
-                class="max-w-[80%] rounded-xl shadow-lg" />
-        </div>
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-        {{-- Kanan - Form --}}
-        <div class="flex w-full md:w-1/2 items-center justify-center bg-gray-50 p-8">
-            <form method="POST" action="{{ route('register') }}"
-                class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md border border-gray-200 space-y-4">
-                @csrf
+        <x-validation-errors class="mb-4" />
 
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Daftar Akun Baru</h2>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-                {{-- Nama --}}
-                <div>
-                    <label for="name" class="block text-gray-700 mb-1">Nama</label>
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
-                        class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Masukkan nama lengkap">
+            <div>
+                <x-label for="name" value="{{ __('Name') }}" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-label for="terms">
+                        <div class="flex items-center">
+                            <x-checkbox name="terms" id="terms" required />
+
+                            <div class="ml-2">
+                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                ]) !!}
+                            </div>
+                        </div>
+                    </x-label>
                 </div>
+            @endif
 
-                {{-- Email --}}
-                <div>
-                    <label for="email" class="block text-gray-700 mb-1">Email</label>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" required
-                        class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Masukkan email">
-                </div>
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </a>
 
-                {{-- Password --}}
-                <div class="relative">
-                    <label for="password" class="block text-gray-700 mb-1">Kata Sandi</label>
-                    <input id="register-password" type="password" name="password" required
-                        class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
-                        placeholder="Masukkan kata sandi">
-                    <button type="button" onclick="toggleRegisterPassword()" class="absolute top-9 right-3">
-                        <svg id="register-eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <svg id="register-eye-closed" xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-gray-500 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.955 9.955 0 012.293-3.95M6.223 6.223A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.96 9.96 0 01-4.293 5.293M6.223 6.223L18 18" />
-                        </svg>
-                    </button>
-                </div>
-
-                {{-- Konfirmasi Password --}}
-                <div class="relative">
-                    <label for="password_confirmation" class="block text-gray-700 mb-1">Konfirmasi Kata Sandi</label>
-                    <input id="register-password-confirm" type="password" name="password_confirmation" required
-                        class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
-                        placeholder="Ulangi kata sandi">
-                    <button type="button" onclick="toggleRegisterPasswordConfirm()" class="absolute top-9 right-3">
-                        <svg id="register-eye-open-confirm" xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <svg id="register-eye-closed-confirm" xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-gray-500 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.955 9.955 0 012.293-3.95M6.223 6.223A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.96 9.96 0 01-4.293 5.293M6.223 6.223L18 18" />
-                        </svg>
-                    </button>
-                </div>
-
-                {{-- Role User --}}
-                <div>
-                    <label for="role" class="block text-gray-700 mb-1">Role User</label>
-                    <select id="role" name="role"
-                        class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required>
-                        <option class="bg-white text-gray-800" value="operator">Operator Sekolah</option>
-                        <option class="bg-white text-gray-800" value="kepala_sekolah">Kepala Sekolah</option>
-                        <option class="bg-white text-gray-800" value="staff_keuangan">Staff Keuangan</option>
-                    </select>
-                </div>
-
-                {{-- Tombol Submit --}}
-                <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300">
-                    Daftar
-                </button>
-
-                <div class="mt-4 text-sm text-center text-gray-600">
-                    Sudah punya akun?
-                    <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    {{-- Script Toggle Password --}}
-    <script>
-        function toggleRegisterPassword() {
-            const input = document.getElementById("register-password");
-            const openEye = document.getElementById("register-eye-open");
-            const closedEye = document.getElementById("register-eye-closed");
-            if (input.type === "password") {
-                input.type = "text";
-                openEye.classList.add("hidden");
-                closedEye.classList.remove("hidden");
-            } else {
-                input.type = "password";
-                openEye.classList.remove("hidden");
-                closedEye.classList.add("hidden");
-            }
-        }
-
-        function toggleRegisterPasswordConfirm() {
-            const input = document.getElementById("register-password-confirm");
-            const openEye = document.getElementById("register-eye-open-confirm");
-            const closedEye = document.getElementById("register-eye-closed-confirm");
-            if (input.type === "password") {
-                input.type = "text";
-                openEye.classList.add("hidden");
-                closedEye.classList.remove("hidden");
-            } else {
-                input.type = "password";
-                openEye.classList.remove("hidden");
-                closedEye.classList.add("hidden");
-            }
-        }
-    </script>
+                <x-button class="ml-4">
+                    {{ __('Register') }}
+                </x-button>
+            </div>
+        </form>
+    </x-authentication-card>
 </x-guest-layout>

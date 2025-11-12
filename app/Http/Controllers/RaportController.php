@@ -14,6 +14,8 @@ class RaportController extends Controller
     // Wali kelas can view raports for their class
     public function index()
     {
+        $this->authorize('viewAny', Raport::class);
+
         $user = auth()->user();
         $guru = Guru::where('nip', $user->email)->first() ?? Guru::where('nama', $user->name)->first();
 
@@ -29,6 +31,8 @@ class RaportController extends Controller
     // Generate raport for a specific student and semester
     public function create()
     {
+        $this->authorize('create', Raport::class);
+
         $siswas = Siswa::all();
         $semesters = ['1', '2'];
         $tahunAjaran = date('Y');
@@ -38,6 +42,8 @@ class RaportController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Raport::class);
+
         $validated = $request->validate([
             'siswa_id' => 'required|exists:siswas,id',
             'semester' => 'required|in:1,2',
@@ -68,6 +74,8 @@ class RaportController extends Controller
 
     public function show(Raport $raport)
     {
+        $this->authorize('view', $raport);
+
         $nilaiSiswa = NilaiSiswa::where('siswa_id', $raport->siswa_id)
             ->with('guruBidang.bidang', 'guruBidang.guru')
             ->get();
@@ -77,12 +85,16 @@ class RaportController extends Controller
 
     public function edit(Raport $raport)
     {
+        $this->authorize('update', $raport);
+
         $gurus = Guru::all();
         return view('raport.edit', compact('raport', 'gurus'));
     }
 
     public function update(Request $request, Raport $raport)
     {
+        $this->authorize('update', $raport);
+
         $validated = $request->validate([
             'catatan_wali_kelas' => 'nullable|string',
             'catatan_kepala_sekolah' => 'nullable|string',
@@ -97,11 +109,13 @@ class RaportController extends Controller
     // Print raport as PDF
     public function printPdf(Raport $raport)
     {
+        $this->authorize('view', $raport);
+
         $nilaiSiswa = NilaiSiswa::where('siswa_id', $raport->siswa_id)
             ->with('guruBidang.bidang', 'guruBidang.guru')
             ->get();
 
-    $pdf = Pdf::loadView('raport.pdf', compact('raport', 'nilaiSiswa'));
+        $pdf = Pdf::loadView('raport.pdf', compact('raport', 'nilaiSiswa'));
         
         $raport->update([
             'sudah_dicetak' => true,
@@ -113,6 +127,8 @@ class RaportController extends Controller
 
     public function destroy(Raport $raport)
     {
+        $this->authorize('delete', $raport);
+
         $raport->delete();
         return redirect()->route('raport.index')->with('success', 'Raport berhasil dihapus');
     }

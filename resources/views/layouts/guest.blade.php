@@ -1,48 +1,22 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>{{ config('app.name', 'Administrasi Sekolah') }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-<body>
-    {{ $slot }}
-</body>
-<script>
-    function toggleRegisterPassword() {
-        const input = document.getElementById('register-password');
-        const eyeOpen = document.getElementById('register-eye-open');
-        const eyeClosed = document.getElementById('register-eye-closed');
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        if (input.type === 'password') {
-            input.type = 'text';
-            eyeOpen.classList.add('hidden');
-            eyeClosed.classList.remove('hidden');
-        } else {
-            input.type = 'password';
-            eyeOpen.classList.remove('hidden');
-            eyeClosed.classList.add('hidden');
-        }
-    }
-
-    function toggleRegisterPasswordConfirm() {
-        const input = document.getElementById('register-password-confirm');
-        const eyeOpen = document.getElementById('register-eye-open-confirm');
-        const eyeClosed = document.getElementById('register-eye-closed-confirm');
-
-        if (input.type === 'password') {
-            input.type = 'text';
-            eyeOpen.classList.add('hidden');
-            eyeClosed.classList.remove('hidden');
-        } else {
-            input.type = 'password';
-            eyeOpen.classList.remove('hidden');
-            eyeClosed.classList.add('hidden');
-        }
-    }
-</script>
-
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>
+        <div class="font-sans text-gray-900 antialiased">
+            {{ $slot }}
+        </div>
+    </body>
 </html>
