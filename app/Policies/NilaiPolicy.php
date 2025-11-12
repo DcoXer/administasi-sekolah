@@ -13,8 +13,8 @@ class NilaiPolicy
      */
     public function viewAny(User $user): bool
     {
-        // Allow gurus and kepala_sekolah and operator
-        return in_array($user->role, ['guru', 'kepala_sekolah', 'operator']);
+        // Allow guru_bidang, kepala_madrasah and operator
+        return $user->hasAnyRole(['guru_bidang', 'kepala_madrasah', 'operator']);
     }
 
     /**
@@ -23,9 +23,9 @@ class NilaiPolicy
     public function view(User $user, NilaiSiswa $nilaiSiswa): bool
     {
         // Guru who teaches this subject or kepala_sekolah can view
-        if ($user->role === 'kepala_sekolah' || $user->role === 'operator') return true;
+        if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
 
-        if ($user->role === 'guru') {
+        if ($user->hasRole('guru_bidang')) {
             // match guru by name or NIP (simple heuristic)
             $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
             if (!$guru) return false;
@@ -40,8 +40,8 @@ class NilaiPolicy
      */
     public function create(User $user): bool
     {
-        // Only guru can create grades
-        return $user->role === 'guru';
+        // Only guru_bidang can create grades
+        return $user->hasRole('guru_bidang');
     }
 
     /**
@@ -65,8 +65,8 @@ class NilaiPolicy
      */
     public function delete(User $user, NilaiSiswa $nilaiSiswa): bool
     {
-        // Allow kepala or operator only
-        return in_array($user->role, ['kepala_sekolah', 'operator']);
+        // Allow kepala_madrasah or operator only
+        return $user->hasAnyRole(['kepala_madrasah', 'operator']);
     }
 
     /**

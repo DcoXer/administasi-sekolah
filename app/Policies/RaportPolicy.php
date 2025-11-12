@@ -13,8 +13,8 @@ class RaportPolicy
      */
     public function viewAny(User $user): bool
     {
-        // Wali kelas, kepala_sekolah and operator can view lists
-        return in_array($user->role, ['wali_kelas', 'guru', 'kepala_sekolah', 'operator']);
+        // Wali kelas, guru bidang, kepala madrasah and operator can view lists
+        return $user->hasAnyRole(['wali_kelas', 'guru_bidang', 'kepala_madrasah', 'operator']);
     }
 
     /**
@@ -23,9 +23,9 @@ class RaportPolicy
     public function view(User $user, Raport $raport): bool
     {
         // Wali kelas of the student or kepala_sekolah or operator can view
-        if (in_array($user->role, ['kepala_sekolah', 'operator'])) return true;
+        if ($user->hasAnyRole(['kepala_madrasah', 'operator'])) return true;
 
-        if ($user->role === 'guru' || $user->role === 'wali_kelas') {
+        if ($user->hasAnyRole(['guru_bidang', 'wali_kelas'])) {
             $guru = \App\Models\Guru::where('nip', $user->email)->orWhere('nama', $user->name)->first();
             if (!$guru) return false;
             // Wali kelas - check wali_kelas_id
