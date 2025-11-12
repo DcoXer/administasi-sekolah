@@ -90,6 +90,34 @@
             </div>
         </div>
 
+        <!-- Akademik: Nilai / Raport / Bidang Studi -->
+        <div x-data="{ akademikOpen: false }">
+            <button @click="akademikOpen = !akademikOpen"
+                class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 shadow-none transition-all duration-300 hover:scale-[1.02]">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                </svg>
+                <span x-show="open" class="ml-3">Akademik</span>
+                <svg x-show="open" :class="akademikOpen ? 'rotate-90' : ''"
+                    class="w-4 h-4 ml-auto transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <div x-show="akademikOpen" x-transition.scale.opacity class="ml-10 space-y-1">
+                @if(Auth::user()->role === 'guru')
+                    <a href="{{ route('nilai.index') }}" class="block py-2 text-sm hover:text-blue-700">Input Nilai</a>
+                @endif
+
+                @if(in_array(Auth::user()->role, ['wali_kelas','guru','kepala_sekolah','operator']))
+                    <a href="{{ route('raport.index') }}" class="block py-2 text-sm hover:text-blue-700">Raport</a>
+                @endif
+
+                @if(in_array(Auth::user()->role, ['kepala_sekolah','operator']))
+                    <a href="{{ route('bidang-studi.index') }}" class="block py-2 text-sm hover:text-blue-700">Bidang Studi</a>
+                @endif
+            </div>
+        </div>
+
         <!-- Dropdown Guru -->
         <div x-data="{ guruOpen: false }">
             <button @click="guruOpen = !guruOpen"
