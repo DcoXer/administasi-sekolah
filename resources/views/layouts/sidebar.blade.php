@@ -17,7 +17,7 @@
         </a>
 
         <!-- Manajemen User -->
-        @if(Auth::user()->role === 'operator')
+        @if(Auth::user()->hasRole('operator'))
         <a href="{{ route('users.index') }}"
             class="flex items-center p-3 rounded-lg hover:bg-blue-50 
                        shadow-none transition-all duration-300 hover:scale-[1.02]">
@@ -36,8 +36,8 @@
         </a>
         @endif
 
-         <!-- Manajemen User -->
-        @if(Auth::user()->role === 'kepala_sekolah')
+         <!-- Approval Mutasi Siswa -->
+        @if(Auth::user()->hasRole('kepala_madrasah'))
         <a href="{{ route('mutasi.approval') }}"
             class="flex items-center p-3 rounded-lg hover:bg-blue-50 
                        shadow-none transition-all duration-300 hover:scale-[1.02]">
@@ -49,7 +49,7 @@
         @endif
 
         <!-- Dropdown Keuangan -->
-        @if(Auth::user()->role === 'staff_keuangan')
+        @if(Auth::user()->hasRole('staff_keuangan'))
         <div x-data="{ keuanganOpen: false }">
             <button @click="keuanganOpen = !keuanganOpen"
                 class="flex items-center w-full p-3 rounded-lg hover:bg-green-50 shadow-none transition-all duration-300 hover:scale-[1.02]">
@@ -84,7 +84,7 @@
             </button>
             <div x-show="siswaOpen" x-transition.scale.opacity class="ml-10 space-y-1">
                 <a href="{{ route('siswa.public') }}" class="block py-2 text-sm hover:text-blue-700">Daftar Siswa</a>
-                @if(Auth::user()->role === 'operator')
+                @if(Auth::user()->hasRole('operator'))
                 <a href="{{ route('siswa.index') }}" class="block py-2 text-sm hover:text-blue-700">Manajemen Siswa</a>
                 @endif
             </div>
@@ -104,15 +104,15 @@
                 </svg>
             </button>
             <div x-show="akademikOpen" x-transition.scale.opacity class="ml-10 space-y-1">
-                @if(Auth::user()->role === 'guru')
+                @if(Auth::user()->hasRole('guru_bidang'))
                     <a href="{{ route('nilai.index') }}" class="block py-2 text-sm hover:text-blue-700">Input Nilai</a>
                 @endif
 
-                @if(in_array(Auth::user()->role, ['wali_kelas','guru','kepala_sekolah','operator']))
+                @if(Auth::user()->hasAnyRole(['wali_kelas','guru_bidang','kepala_madrasah','operator']))
                     <a href="{{ route('raport.index') }}" class="block py-2 text-sm hover:text-blue-700">Raport</a>
                 @endif
 
-                @if(in_array(Auth::user()->role, ['kepala_sekolah','operator']))
+                @if(Auth::user()->hasAnyRole(['kepala_madrasah','operator']))
                     <a href="{{ route('bidang-studi.index') }}" class="block py-2 text-sm hover:text-blue-700">Bidang Studi</a>
                 @endif
             </div>
@@ -133,7 +133,7 @@
             </button>
             <div x-show="guruOpen" x-transition.scale.opacity class="ml-10 space-y-1">
                 <a href="{{ route('guru.public') }}" class="block py-2 text-sm hover:text-blue-700">Daftar Guru</a>
-                @if(Auth::user()->role === 'operator')
+                @if(Auth::user()->hasRole('operator'))
                 <a href="{{ route('guru.index') }}" class="block py-2 text-sm hover:text-blue-700">Manajemen Guru</a>
                 @endif
             </div>
