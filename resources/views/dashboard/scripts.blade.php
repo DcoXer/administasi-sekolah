@@ -1,8 +1,8 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-    // ==================== ROLE: KEPALA SEKOLAH ====================
-    @if(($user->role ?? '') === 'kepala_sekolah')
+    // ==================== ROLE: KEPALA MADRASAH ====================
+    @if(Auth::user()->hasRole('kepala_madrasah'))
     const mutasiCtx = document.getElementById('mutasiChart');
     if (mutasiCtx) {
         new Chart(mutasiCtx, {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
     @endif
 
     // ==================== ROLE: STAFF KEUANGAN ====================
-    @if(($user->role ?? '') === 'staff_keuangan')
+    @if(Auth::user()->hasRole('staff_keuangan'))
     const duCtx = document.getElementById('duChart');
     if (duCtx) {
         new Chart(duCtx, {
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     @endif
 
     // ==================== ROLE: OPERATOR ====================
-    @if(($user->role ?? '') === 'operator')
+    @if(Auth::user()->hasRole('operator'))
     const siswaCtx = document.getElementById('siswaChart');
     if (siswaCtx) {
         new Chart(siswaCtx, {

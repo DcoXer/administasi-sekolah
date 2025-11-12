@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $totalGuru = Guru::count();
 
         // ================= STAFF KEUANGAN =================
-        if ($user->role === 'staff_keuangan') {
+        if ($user->hasRole('staff_keuangan')) {
             $siswaPerKelas = [];
             for ($i = 1; $i <= 6; $i++) {
                 $siswaPerKelas[$i] = Siswa::where('kelas', $i)->count();
@@ -69,7 +69,7 @@ class DashboardController extends Controller
         }
 
         // ================= OPERATOR =================
-        if ($user->role === 'operator') {
+        if ($user->hasRole('operator')) {
             $jumlahSiswa = Siswa::select('kelas')
                 ->selectRaw('COUNT(*) as total')
                 ->groupBy('kelas')
@@ -91,8 +91,8 @@ class DashboardController extends Controller
             ]);
         }
 
-        // ================= KEPALA SEKOLAH =================
-        if ($user->role === 'kepala_sekolah') {
+        // ================= KEPALA MADRASAH (renamed from kepala_sekolah) =================
+        if ($user->hasRole('kepala_madrasah')) {
             // 🔹 Import model MutasiSiswa (pastikan di atas file udah ada)
             // use App\Models\MutasiSiswa;
 
