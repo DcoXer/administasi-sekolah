@@ -31,7 +31,10 @@
                     <label class="block text-sm font-medium text-gray-700">Password</label>
                     <input type="password" name="password" class="w-full border rounded px-3 py-2" required>
                 </div>
-
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+                    <input type="register-password-confirm" name="password_confirmation" class="w-full border rounded px-3 py-2" required>
+                </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Role</label>
                     <select name="role" class="w-full border rounded px-3 py-2" required>

@@ -14,22 +14,14 @@
         }
 
         body {
-            background: radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
-                radial-gradient(at 70% 70%, #f9a8d4, transparent 60%),
-                radial-gradient(at 50% 90%, #93c5fd, transparent 60%), #fdfdfd;
-            background-attachment: fixed;
+            background: #f9fafb;
         }
 
-        /* ===== Glass Mega Card ===== */
+        /* ===== Simple Card Style ===== */
         .mega-card {
-            background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25));
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            box-shadow:
-                0 10px 30px rgba(28, 33, 61, .12),
-                inset 0 1px 0 rgba(255, 255, 255, .35);
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         /* ===== Animasi smooth (tanpa library) ===== */
@@ -47,8 +39,8 @@
 
         /* Shine tipis saat hover card kecil */
         .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(30, 41, 59, .18);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .card-hover {
@@ -62,37 +54,37 @@
     <!-- ===== Header / Navbar ===== -->
     <header class="fixed top-0 left-0 right-0 z-50">
         <div
-            class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,.06)]"
-            style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.15));">
+            class="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-3 rounded-2xl shadow-sm"
+            style="background: #ffffff;">
             <div class="flex items-center justify-between">
                 <!-- Logo (kanan) -->
                 <div class="flex items-center gap-2">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Logo"
                         class="w-9 h-9">
                     <span
-                        class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-blue-600 via-violet-600 to-pink-500 bg-clip-text text-transparent tracking-wide">SekolahKu</span>
+                        class="text-lg sm:text-xl font-extrabold text-blue-600 tracking-wide">SekolahKu</span>
                 </div>
                 <!-- Menu tengah -->
-                <nav class="hidden md:flex items-center gap-8 text-slate-700 font-medium">
-                    <a href="#home" class="hover:text-indigo-600 transition">Home</a>
-                    <a href="#about" class="hover:text-indigo-600 transition">About</a>
-                    <a href="#kontak" class="hover:text-indigo-600 transition">Kontak</a>
-                    <a href="#informasi" class="hover:text-indigo-600 transition">Informasi</a>
+                <nav class="hidden md:flex items-center gap-8 text-gray-700 font-medium">
+                    <a href="#home" class="hover:text-blue-600 transition">Home</a>
+                    <a href="#about" class="hover:text-blue-600 transition">About</a>
+                    <a href="#kontak" class="hover:text-blue-600 transition">Kontak</a>
+                    <a href="#informasi" class="hover:text-blue-600 transition">Informasi</a>
                 </nav>
                 <!-- Tombol Login (kiri) -->
                 <div class="flex text-end gap-4">
                     <a href="{{ route('login') }}"
-                        class="px-4 py-2 rounded-full bg-transparant hover:bg-indigo-500 transition-colors duration-300 text-black hover:text-white font-semibold shadow hover:shadow-lg hidden md:flex">
+                        class="px-4 py-2 rounded-full bg-transparent hover:bg-blue-500 transition-colors duration-300 text-gray-800 hover:text-white font-semibold shadow hover:shadow-lg hidden md:flex">
                         Login
                     </a>
                     <a href="{{ route('register') }}"
-                        class="px-4 py-2 rounded-full bg-indigo-800 hover:bg-indigo-400 transition-colors duration-300 text-white hover:text-black font-semibold shadow hover:shadow-lg hidden md:flex">
+                        class="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors duration-300 text-white font-semibold shadow hover:shadow-lg hidden md:flex">
                         Daftar
                     </a>
                 </div>
                 <!-- Hamburger (mobile) -->
                 <button id="menu-toggle"
-                    class="md:hidden p-2 rounded-lg hover:bg-white/60 transition text-slate-700">
+                    class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition text-gray-700">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
@@ -101,12 +93,12 @@
             </div>
 
             <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden md:hidden flex-col gap-3 pt-3 bg-white/50 backdrop-blur-sm font-semibold">
-                <a href="#home" class="block px-3 py-2 rounded-lg hover:bg-white/70">Home</a>
-                <a href="#about" class="block px-3 py-2 rounded-lg hover:bg-white/70">About</a>
-                <a href="#kontak" class="block px-3 py-2 rounded-lg hover:bg-white/70">Kontak</a>
-                <a href="#informasi" class="block px-3 py-2 rounded-lg hover:bg-white/70">Informasi</a>
-                <a href="{{ route('login') }}" class="block px-3 py-2 rounded-lg bg-white/80 hover:bg-white">login</a>
+            <div id="mobile-menu" class="hidden md:hidden flex-col gap-3 pt-3 bg-gray-50 font-semibold">
+                <a href="#home" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-lg hover:bg-gray-100">About</a>
+                <a href="#kontak" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Kontak</a>
+                <a href="#informasi" class="block px-3 py-2 rounded-lg hover:bg-gray-100">Informasi</a>
+                <a href="{{ route('login') }}" class="block px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200">login</a>
             </div>
         </div>
     </header>
@@ -129,8 +121,8 @@
                         <p class="text-slate-600 mt-1">Selamat datang di portal resmi SekolahKu.</p>
                     </div>
                     <div
-                        class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500/15 to-pink-500/15 border border-white/50">
-                        <span class="text-sm font-semibold text-slate-700">Versi Publik</span>
+                        class="px-4 py-2 rounded-lg bg-blue-50 border border-blue-200">
+                        <span class="text-sm font-semibold text-blue-700">Versi Publik</span>
                     </div>
                 </div>
 
@@ -139,12 +131,12 @@
                     <!-- Kolom kiri -->
                     <div class="lg:col-span-2 space-y-6" data-reveal="left">
                         <div
-                            class="rounded-2xl p-6 sm:p-8 bg-white/60 border border-white/60 shadow card-hover"
-                            style="background-image: radial-gradient(1200px 200px at 0% 0%, rgba(99,102,241,.08), transparent 40%);">
-                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
+                            class="rounded-2xl p-6 sm:p-8 bg-white border border-gray-200 shadow card-hover"
+                            style="background-image: none;">
+                            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                                 Pendidikan Berkualitas, Lingkungan Nyaman
                             </h2>
-                            <p class="text-slate-700 leading-relaxed">
+                            <p class="text-gray-700 leading-relaxed">
                                 Kami berkomitmen memberikan pengalaman belajar terbaik melalui kurikulum
                                 yang relevan, guru berpengalaman, dan fasilitas yang mendukung.
                             </p>
@@ -152,14 +144,14 @@
 
                         <!-- Info cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-reveal="right">
-                            <div class="rounded-2xl p-5 bg-white/55 border border-white/60 shadow card-hover">
-                                <h3 class="font-semibold text-slate-800 mb-1">Program Unggulan</h3>
-                                <p class="text-slate-700 text-sm">Kegiatan literasi, sains, seni, dan olahraga yang
+                            <div class="rounded-2xl p-5 bg-white border border-gray-200 shadow card-hover">
+                                <h3 class="font-semibold text-gray-800 mb-1">Program Unggulan</h3>
+                                <p class="text-gray-700 text-sm">Kegiatan literasi, sains, seni, dan olahraga yang
                                     dirancang adaptif.</p>
                             </div>
-                            <div class="rounded-2xl p-5 bg-white/55 border border-white/60 shadow card-hover">
-                                <h3 class="font-semibold text-slate-800 mb-1">Fasilitas</h3>
-                                <p class="text-slate-700 text-sm">Perpustakaan, lab komputer, ruang multimedia, dan
+                            <div class="rounded-2xl p-5 bg-white border border-gray-200 shadow card-hover">
+                                <h3 class="font-semibold text-gray-800 mb-1">Fasilitas</h3>
+                                <p class="text-gray-700 text-sm">Perpustakaan, lab komputer, ruang multimedia, dan
                                     area hijau.</p>
                             </div>
                         </div>
@@ -168,13 +160,13 @@
                     <!-- Kolom kanan: quick links -->
                     <aside class="space-y-6">
                         <a href="#about"
-                            class="block rounded-2xl p-5 bg-white/55 border border-white/60 shadow card-hover" data-reveal="up">
+                            class="block rounded-2xl p-5 bg-white border border-gray-200 shadow card-hover" data-reveal="up">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-slate-800 font-semibold">Tentang Sekolah</p>
-                                    <p class="text-slate-600 text-sm">Profil & visi misi.</p>
+                                    <p class="text-gray-800 font-semibold">Tentang Sekolah</p>
+                                    <p class="text-gray-600 text-sm">Profil & visi misi.</p>
                                 </div>
-                                <p class="text-slate-500 text-sm flex gap-2">
+                                <p class="text-gray-500 text-sm flex gap-2">
                                     Go To
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" class="size-5">
@@ -184,13 +176,13 @@
                             </div>
                         </a>
                         <a href="#informasi"
-                            class="block rounded-2xl p-5 bg-white/55 border border-white/60 shadow card-hover" data-reveal="down">
+                            class="block rounded-2xl p-5 bg-white border border-gray-200 shadow card-hover" data-reveal="down">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-slate-800 font-semibold">Informasi Sekolah</p>
-                                    <p class="text-slate-600 text-sm">Pengumuman & event.</p>
+                                    <p class="text-gray-800 font-semibold">Informasi Sekolah</p>
+                                    <p class="text-gray-600 text-sm">Pengumuman & event.</p>
                                 </div>
-                                <p class="text-slate-500 text-sm flex gap-2">
+                                <p class="text-gray-500 text-sm flex gap-2">
                                     Go To
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" class="size-5">
@@ -200,13 +192,13 @@
                             </div>
                         </a>
                         <a href="#kontak"
-                            class="block rounded-2xl p-5 bg-white/55 border border-white/60 shadow card-hover" data-reveal="up">
+                            class="block rounded-2xl p-5 bg-white border border-gray-200 shadow card-hover" data-reveal="up">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-slate-800 font-semibold">Kontak</p>
-                                    <p class="text-slate-600 text-sm">Email & nomor telp.</p>
+                                    <p class="text-gray-800 font-semibold">Kontak</p>
+                                    <p class="text-gray-600 text-sm">Email & nomor telp.</p>
                                 </div>
-                                <p class="text-slate-500 text-sm flex gap-2">
+                                <p class="text-gray-500 text-sm flex gap-2">
                                     Go To
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" class="size-5">
@@ -234,9 +226,9 @@
                             alt="SekolahKu Environment" data-reveal="left">
 
                         <!-- Card Sejarah -->
-                        <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-11/12 md:w-10/12 p-6 rounded-3xl bg-white/70 shadow-2xl">
-                            <h4 class="text-xl font-bold text-slate-800 mb-2">Sejarah SekolahKu</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed">
+                        <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-11/12 md:w-10/12 p-6 rounded-3xl bg-white shadow-lg border border-gray-200">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Sejarah SekolahKu</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
                                 SekolahKu berdiri sejak tahun 1990 dengan visi mencetak generasi unggul yang berkarakter.
                                 Dengan komitmen kuat pada pendidikan berkualitas, inovasi kurikulum, dan pengembangan guru profesional,
                                 SekolahKu telah berhasil bertahan dan berkembang hingga saat ini.
@@ -245,12 +237,12 @@
                     </div>
 
                     <!-- Card Prestasi -->
-                    <div class="w-11/12 md:w-10/12 mx-auto mt-28 p-6 rounded-3xl bg-white/70 shadow-2xl" data-reveal="left">
-                        <h4 class="text-xl font-bold text-slate-800 mb-3">Prestasi & Kegiatan Siswa</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-2">
+                    <div class="w-11/12 md:w-10/12 mx-auto mt-20 p-6 rounded-3xl bg-white shadow-lg border border-gray-200" data-reveal="left">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Prestasi & Kegiatan Siswa</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-2">
                             Siswa kami aktif mengikuti berbagai lomba akademik dan non-akademik di tingkat kota hingga nasional, meraih prestasi gemilang di bidang sains, seni, dan olahraga.
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed">
+                        <p class="text-gray-600 text-sm leading-relaxed">
                             Program-program inovatif mendorong kreativitas, kerjasama tim, dan kepemimpinan, sehingga siswa siap menghadapi tantangan abad 21 dengan percaya diri.
                         </p>
                     </div>
@@ -261,79 +253,79 @@
                 <div class="lg:col-span-5 grid grid-rows-6 gap-6">
 
                     <!-- Feature 1 -->
-                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.84 5.422C18 21 12 19 12 19s-6 2-7-3a12.083 12.083 0 01.84-5.422L12 14z" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Fasilitas Modern</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Fasilitas Modern</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Laboratorium, perpustakaan digital, ruang seni, dan area hijau untuk belajar dan berekspresi.
                             </p>
                         </div>
                     </div>
 
                     <!-- Feature 2 (double height) -->
-                    <div class="row-span-2 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-2 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m0-9v1a9 9 0 100 18v1" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Kurikulum Kreatif</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Kurikulum Kreatif</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Program literasi, STEM, seni, dan olahraga dikemas interaktif, siswa bisa memilih sesuai minat dan bakat.
                             </p>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Guru Berpengalaman</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Guru Berpengalaman</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Tim pengajar profesional dan berkompeten, siap membimbing siswa meraih prestasi akademik & non-akademik.
                             </p>
                         </div>
                     </div>
 
                     <!-- Feature 4 -->
-                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2s-3 1.343-3 3 1.343 3 3 3zM6 20v-2a6 6 0 0112 0v2" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Pengembangan Karakter</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Pengembangan Karakter</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Program karakter & leadership agar siswa memiliki soft skill dan kepemimpinan yang matang.
                             </p>
                         </div>
                     </div>
 
                     <!-- Feature 5 -->
-                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7 12l5 5 7-7" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Kegiatan Ekstrakurikuler</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Kegiatan Ekstrakurikuler</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Olahraga, musik, seni, dan klub akademik mendukung minat & bakat siswa secara menyeluruh.
                             </p>
                         </div>
                     </div>
 
                     <!-- Feature 6 -->
-                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white/60 shadow-lg">
-                        <svg class="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="row-span-1 flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border border-gray-200">
+                        <svg class="w-6 h-6 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         <div>
-                            <h4 class="font-semibold text-slate-800">Teknologi Digital</h4>
-                            <p class="text-slate-600 text-sm leading-snug">
+                            <h4 class="font-semibold text-gray-800">Teknologi Digital</h4>
+                            <p class="text-gray-600 text-sm leading-snug">
                                 Penggunaan software edukatif dan platform online untuk mendukung proses belajar interaktif.
                             </p>
                         </div>
@@ -347,20 +339,20 @@
         <!-- Informasi Section -->
         <section id="informasi" class="mx-auto max-w-[1400px] mb-16" data-reveal="up">
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-6 rounded-3xl bg-gradient-to-br from-indigo-100 to-indigo-200 shadow-lg card-hover" data-reveal="left">
-                    <div class="w-20 h-20 mask mask-hexagon bg-indigo-500 text-white flex items-center justify-center mx-auto text-2xl mb-4">📅</div>
-                    <h4 class="font-bold text-center">Penerimaan</h4>
-                    <p class="text-center text-sm text-slate-600">Mulai Juli 2025</p>
+                <div class="p-6 rounded-3xl bg-blue-50 border border-blue-200 shadow-sm card-hover" data-reveal="left">
+                    <div class="w-20 h-20 bg-blue-600 text-white flex items-center justify-center mx-auto text-2xl mb-4 rounded-lg">📅</div>
+                    <h4 class="font-bold text-center text-gray-800">Penerimaan</h4>
+                    <p class="text-center text-sm text-gray-600">Mulai Juli 2025</p>
                 </div>
-                <div class="p-6 rounded-3xl bg-gradient-to-br from-pink-100 to-pink-200 shadow-lg card-hover" data-reveal="up">
-                    <div class="w-20 h-20 mask mask-circle bg-pink-500 text-white flex items-center justify-center mx-auto text-2xl mb-4">🏆</div>
-                    <h4 class="font-bold text-center">Lomba</h4>
-                    <p class="text-center text-sm text-slate-600">Semester ini</p>
+                <div class="p-6 rounded-3xl bg-purple-50 border border-purple-200 shadow-sm card-hover" data-reveal="up">
+                    <div class="w-20 h-20 bg-purple-600 text-white flex items-center justify-center mx-auto text-2xl mb-4 rounded-lg">🏆</div>
+                    <h4 class="font-bold text-center text-gray-800">Lomba</h4>
+                    <p class="text-center text-sm text-gray-600">Semester ini</p>
                 </div>
-                <div class="p-6 rounded-3xl bg-gradient-to-br from-green-100 to-green-200 shadow-lg card-hover" data-reveal="right">
-                    <div class="w-20 h-20 mask mask-diamond bg-green-500 text-white flex items-center justify-center mx-auto text-2xl mb-4">📢</div>
-                    <h4 class="font-bold text-center">Jadwal Ujian</h4>
-                    <p class="text-center text-sm text-slate-600">Portal Online</p>
+                <div class="p-6 rounded-3xl bg-green-50 border border-green-200 shadow-sm card-hover" data-reveal="right">
+                    <div class="w-20 h-20 bg-green-600 text-white flex items-center justify-center mx-auto text-2xl mb-4 rounded-lg">📢</div>
+                    <h4 class="font-bold text-center text-gray-800">Jadwal Ujian</h4>
+                    <p class="text-center text-sm text-gray-600">Portal Online</p>
                 </div>
             </div>
         </section>
@@ -368,20 +360,20 @@
         <!-- Kontak Section -->
         <section id="kontak" class="mx-auto max-w-[1400px] mb-16" data-reveal="up">
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="group p-6 rounded-3xl bg-white/40 backdrop-blur shadow-lg card-hover hover:scale-105 transition" data-reveal="left">
-                    <div class="w-16 h-16 mask mask-circle bg-indigo-500 text-white flex items-center justify-center mx-auto mb-4 group-hover:rotate-6 transition">📧</div>
-                    <h4 class="font-bold text-center">Email</h4>
-                    <p class="text-center text-sm text-slate-600">info@sekolahku.sch.id</p>
+                <div class="group p-6 rounded-3xl bg-white border border-gray-200 shadow-sm card-hover hover:scale-105 transition" data-reveal="left">
+                    <div class="w-16 h-16 bg-blue-600 text-white flex items-center justify-center mx-auto mb-4 rounded-lg group-hover:rotate-6 transition">📧</div>
+                    <h4 class="font-bold text-center text-gray-800">Email</h4>
+                    <p class="text-center text-sm text-gray-600">info@sekolahku.sch.id</p>
                 </div>
-                <div class="group p-6 rounded-3xl bg-white/40 backdrop-blur shadow-lg card-hover hover:scale-105 transition" data-reveal="up">
-                    <div class="w-16 h-16 mask mask-parallelogram bg-pink-500 text-white flex items-center justify-center mx-auto mb-4 group-hover:rotate-6 transition">📞</div>
-                    <h4 class="font-bold text-center">Telepon</h4>
-                    <p class="text-center text-sm text-slate-600">(021) 123456</p>
+                <div class="group p-6 rounded-3xl bg-white border border-gray-200 shadow-sm card-hover hover:scale-105 transition" data-reveal="up">
+                    <div class="w-16 h-16 bg-purple-600 text-white flex items-center justify-center mx-auto mb-4 rounded-lg group-hover:rotate-6 transition">📞</div>
+                    <h4 class="font-bold text-center text-gray-800">Telepon</h4>
+                    <p class="text-center text-sm text-gray-600">(021) 123456</p>
                 </div>
-                <div class="group p-6 rounded-3xl bg-white/40 backdrop-blur shadow-lg card-hover hover:scale-105 transition" data-reveal="right">
-                    <div class="w-16 h-16 mask mask-hexagon bg-green-500 text-white flex items-center justify-center mx-auto mb-4 group-hover:rotate-6 transition">📍</div>
-                    <h4 class="font-bold text-center">Alamat</h4>
-                    <p class="text-center text-sm text-slate-600">Jl. Pendidikan No. 45</p>
+                <div class="group p-6 rounded-3xl bg-white border border-gray-200 shadow-sm card-hover hover:scale-105 transition" data-reveal="right">
+                    <div class="w-16 h-16 bg-green-600 text-white flex items-center justify-center mx-auto mb-4 rounded-lg group-hover:rotate-6 transition">📍</div>
+                    <h4 class="font-bold text-center text-gray-800">Alamat</h4>
+                    <p class="text-center text-sm text-gray-600">Jl. Pendidikan No. 45</p>
                 </div>
             </div>
         </section>
@@ -392,8 +384,8 @@
 
 
     <!-- ===== Footer ===== -->
-    <footer class="py-6 text-center text-slate-600">
-        <p>&copy; {{ date('Y') }} SekolahKu. All rights reserved.</p>
+    <footer class="py-6 text-center text-gray-600">
+        <p>&copy; {{ date('Y') }} SekolahKu By Firzi Fathir Mas'ud. All rights reserved.</p>
     </footer>
 
     <script>

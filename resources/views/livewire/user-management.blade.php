@@ -23,7 +23,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @foreach ($users as $user)
-                <tr class="hover:bg-white/20">
+                <tr class="hover:bg-gray-50">
                     <td class="px-3 py-2 text-center">{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
                     <td class="px-3 py-2 text-left">{{ $user->name }}</td>
                     <td class="px-3 py-2 text-center">{{ $user->email }}</td>

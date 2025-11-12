@@ -1,83 +1,133 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UpdateProfile;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\GuruController;
-use App\Http\Controllers\KeuanganController;
-use App\Http\Controllers\PembayaranDaftarUlangController;
-use App\Http\Controllers\PembayaranSppController;
-use App\Models\PembayaranSpp;
-use App\Livewire\UserManagement;
+use App\Http\Controllers\{
+    UserController,
+    ProfileController,
+    DashboardController,
+    SiswaController,
+    GuruController,
+    KeuanganController,
+    PembayaranDaftarUlangController,
+    PembayaranSppController,
+    MutasiSiswaController,
+    PersetujuanMutasiController
+};
+use App\Livewire\{
+    MutasiSiswaIndex,
+    MutasiApproval,
+    MutasiApprovalTable,
+    UserManagement
+};
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+// =======================================
+// Public Routes
+// =======================================
+Route::get('/', fn() => view('welcome'))->name('welcome');
 
+Route::get('/daftar-siswa', [SiswaController::class, 'publicIndex'])->name('siswa.public');
+Route::get('/daftar-guru', [GuruController::class, 'publicIndex'])->name('guru.public');
+
+// =======================================
+// Authenticated Routes
+// =======================================
 require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard
+    // --------------------
+    // Dashboard & Profile
+    // --------------------
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+        Route::post('/profile/photo', 'updatePhoto')->name('profile.photo.update');
+    });
 
-    // Siswa
-    Route::get('/siswa', function () {
-        return view('siswa.index');
-    })->name('siswa.index');
+    // --------------------
+    // Data Siswa
+    // --------------------
+    Route::prefix('siswa')->group(function () {
+        Route::get('/', fn() => view('siswa.index'))->name('siswa.index');
+        Route::get('/export', [SiswaController::class, 'export'])->name('siswa.export');
+        Route::post('/import', [SiswaController::class, 'import'])->name('siswa.import');
+        Route::delete('/destroy-all', [SiswaController::class, 'destroyAll'])->name('siswa.destroyAll');
+    });
+
     Route::resource('siswa', SiswaController::class)->except(['index', 'show']);
-    Route::get('/siswa/export', [SiswaController::class, 'export'])->name('siswa.export');
-    Route::post('/siswa/import', [SiswaController::class, 'import'])->name('siswa.import');
-    Route::delete('/siswa/destroy-all', [SiswaController::class, 'destroyAll'])->name('siswa.destroyAll');
     Route::get('/kelas', [SiswaController::class, 'kelasIndex'])->name('kelas.index');
     Route::get('/kelas/{kelas}', [SiswaController::class, 'kelasShow'])->name('kelas.show');
 
-    // Guru
+    // --------------------
+    // Data Guru
+    // --------------------
     Route::resource('guru', GuruController::class);
-    Route::get('guru-export', [GuruController::class, 'export'])->name('guru.export');
-    Route::post('guru-import', [GuruController::class, 'import'])->name('guru.import');
-    Route::delete('guru-destroy-all', [GuruController::class, 'destroyAll'])->name('guru.destroyAll');
+    Route::get('/guru-export', [GuruController::class, 'export'])->name('guru.export');
+    Route::post('/guru-import', [GuruController::class, 'import'])->name('guru.import');
+    Route::delete('/guru-destroy-all', [GuruController::class, 'destroyAll'])->name('guru.destroyAll');
 
-    // User Management (hanya untuk operator)
+    // --------------------
+    // Role: Operator
+    // --------------------
     Route::middleware(['role:operator'])->group(function () {
+        // User Management
         Route::resource('users', UserController::class)->except(['show']);
         Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
         Route::post('/users/import', [UserController::class, 'import'])->name('users.import');
         Route::delete('/users/destroy-all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
+
+        // Mutasi (Operator)
+        Route::prefix('mutasi')->group(function () {
+            Route::get('/mutasi-siswa', function () {
+                return view('livewire.mutasi-siswa');
+            })->name('mutasi-siswa.index');
+            Route::get('/create', [MutasiSiswaController::class, 'create'])->name('mutasi.create');
+            Route::post('/', [MutasiSiswaController::class, 'store'])->name('mutasi.store');
+        });
     });
 
-    // Keuangan
-    Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
+    // --------------------
+    // Role: Kepala Sekolah
+    // --------------------
+    Route::middleware(['role:kepala_sekolah'])->group(function () {
+        // Persetujuan Mutasi
+        //Route::prefix('mutasi')->group(function () {
+          //  Route::get('/', [MutasiApproval::class, 'index'])->name('mutasi.approval');
+          //  Route::get('/{id}', [PersetujuanMutasiController::class, 'show'])->name('kepsek.mutasi.show');
+          //  Route::put('/{id}', [PersetujuanMutasiController::class, 'update'])->name('kepsek.mutasi.update');
+        //});
+
+        // Livewire Approval Mutasi
+        Route::get('/mutasi-approval', MutasiApproval::class)->name('mutasi.approval');
+    });
+
+    // --------------------
+    // Role: Staff Keuangan
+    // --------------------
     Route::prefix('keuangan')->middleware(['checkrole:staff_keuangan'])->group(function () {
         Route::get('/dashboard', [KeuanganController::class, 'index'])->name('keuangan.dashboard');
+
+        // Pembayaran SPP
         Route::resource('pembayaran-spp', PembayaranSppController::class)->except(['show']);
+        Route::get('pembayaran-spp/preview/{id}', [PembayaranSppController::class, 'preview'])->name('pembayaran-spp.preview');
+        Route::get('pembayaran-spp/download/{id}', [PembayaranSppController::class, 'download'])->name('pembayaran-spp.download');
+        Route::get('pembayaran-spp/export', [PembayaranSppController::class, 'export'])->name('pembayaran-spp.export');
+        Route::get('pembayaran-spp/import', [PembayaranSppController::class, 'import'])->name('pembayaran-spp.import');
+
+        // Pembayaran Daftar Ulang
         Route::resource('daftar-ulang', PembayaranDaftarUlangController::class)->except(['show']);
-        Route::get('/keuangan/spp/preview-spp/{id}', [PembayaranSppController::class, 'preview'])->name('pembayaran-spp.preview');
-        Route::get('/keuangan/spp/download-spp/{id}', [PembayaranSppController::class, 'download'])->name('pembayaran-spp.download');
-        Route::get('/pembayaran-spp/export', [PembayaranSppController::class, 'export'])->name('pembayaran-spp.export');
-        Route::get('/pembayaran-spp/import', [PembayaranSppController::class, 'import'])->name('pembayaran-spp.import');
-        Route::get('/keuangan/spp/preview-daftar-ulang/{id}', [PembayaranDaftarUlangController::class, 'preview'])->name('daftar-ulang.preview');
-        Route::get('/keuangan/spp/download-daftar-ulang/{id}', [PembayaranDaftarUlangController::class, 'download'])->name('daftar-ulang.download');
-        Route::get('/pembayaran-daftar-ulang/export', [PembayaranDaftarUlangController::class, 'export'])->name('daftar-ulang.export');
-        Route::get('/pembayaran-daftar-ulang/import', [PembayaranSppController::class, 'import'])->name('daftar-ulang.import');
+        Route::get('daftar-ulang/preview/{id}', [PembayaranDaftarUlangController::class, 'preview'])->name('daftar-ulang.preview');
+        Route::get('daftar-ulang/download/{id}', [PembayaranDaftarUlangController::class, 'download'])->name('daftar-ulang.download');
+        Route::get('daftar-ulang/export', [PembayaranDaftarUlangController::class, 'export'])->name('daftar-ulang.export');
+        Route::get('daftar-ulang/import', [PembayaranSppController::class, 'import'])->name('daftar-ulang.import');
     });
 
-    // Pembayaran
+    // --------------------
+    // Pembayaran Umum
+    // --------------------
     Route::resource('daftar-ulang', PembayaranDaftarUlangController::class);
     Route::resource('pembayaran-spp', PembayaranSppController::class);
 });
-
-// Public routes (tanpa auth)
-Route::get('/daftar-siswa', [SiswaController::class, 'publicIndex'])->name('siswa.public');
-Route::get('/daftar-guru', [GuruController::class, 'publicIndex'])->name('guru.public');
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');

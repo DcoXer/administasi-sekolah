@@ -44,7 +44,7 @@
 
                 <div class="flex justify-between items-center pt-4">
                     <a href="{{ route('users.index') }}" class="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded">Kembali</a>
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Update</button>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Update</button>
                 </div>
             </form>
 

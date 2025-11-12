@@ -35,6 +35,6 @@
     {{-- Right side: Search + Tahun ajaran --}}
     <div class="flex items-center gap-4 w-full sm:w-auto">
         {{-- Search --}}
-        <x-search-with-year placeholder="Cari siswa..." />
+        <x-search-with-year />
     </div>
 </div>

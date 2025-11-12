@@ -22,22 +22,22 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama</label>
-                    <input type="text" name="nama" value="{{ old('nama', $siswa->nama) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-indigo-200" required>
+                    <input type="text" name="nama" value="{{ old('nama', $siswa->nama) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">NISN</label>
-                    <input type="text" name="nisn" value="{{ old('nisn', $siswa->nisn) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-indigo-200" required>
+                    <input type="text" name="nisn" value="{{ old('nisn', $siswa->nisn) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Kelas</label>
-                    <input type="text" name="kelas" value="{{ old('kelas', $siswa->kelas) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-indigo-200" required>
+                    <input type="text" name="kelas" value="{{ old('kelas', $siswa->kelas) }}" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                    <select name="jenis_kelamin" class="w-full border rounded px-3 py-2 focus:ring focus:ring-indigo-200" required>
+                    <select name="jenis_kelamin" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200" required>
                         <option value="Laki-laki" {{ $siswa->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                         <option value="Perempuan" {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                     </select>
@@ -45,7 +45,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Alamat</label>
-                    <textarea name="alamat" rows="3" class="w-full border rounded px-3 py-2 focus:ring focus:ring-indigo-200">{{ old('alamat', $siswa->alamat) }}</textarea>
+                    <textarea name="alamat" rows="3" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">{{ old('alamat', $siswa->alamat) }}</textarea>
                 </div>
 
                 <div>
@@ -63,7 +63,7 @@
                         Kembali
                     </a>
                     <button type="submit"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded transition">
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded transition">
                         Simpan Perubahan
                     </button>
                 </div>

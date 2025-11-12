@@ -2,7 +2,7 @@
     <div class="max-w-4xl mx-auto p-6 mt-10 liquid-table">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Tambah Pembayaran SPP</h2>
-            <a href="{{ route('pembayaran-spp.index') }}" class="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-800 transition">
+            <a href="{{ route('pembayaran-spp.index') }}" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>

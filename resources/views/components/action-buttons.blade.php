@@ -7,7 +7,7 @@
 
 <div class="flex items-center gap-2">
     @if ($editUrl)
-    <button type="button" class="text-indigo-600 hover:text-indigo-800 text-sm">
+    <button type="button" class="text-blue-600 hover:text-blue-800 text-sm">
         <a href="{{ $editUrl }}"
             class="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm shadow transition">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">

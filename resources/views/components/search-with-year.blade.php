@@ -8,23 +8,29 @@
     <input type="text"
         wire:model.live.debounce.300ms="{{ $searchModel ?? 'search' }}"
         placeholder="{{ $placeholder ?? 'Cari...' }}"
-        class="w-full pl-10 pr-3 py-2 rounded-xl 
-                   bg-transparent border border-white/30 
-                   backdrop-blur-md 
+        class="w-full pl-10 pr-3 py-2 rounded-lg 
+                   bg-white border border-gray-300 
                    text-gray-900 placeholder-gray-400
-                   focus:outline-none focus:ring-none focus:border-none
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
                    transition-all duration-300" />
 </div>
 
-{{-- Tahun Ajaran --}}
-<div class="flex items-center gap-2 text-sm font-medium text-gray-700">
-    <svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="w-5 h-5 text-blue-600">
-        <path fill-rule="evenodd"
-            d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
-            clip-rule="evenodd" />
-    </svg>
-    <span>Tahun Ajaran: {{ date('Y') }}/{{ date('Y')+1 }}</span>
+<!-- Bagian Filter Bulan -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
+    <div class="w-full sm:w-48">
+        <select wire:model.live="bulan"
+            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm
+                   focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 ease-in-out">
+            <option value="">Semua Bulan</option>
+            @foreach ([
+            'Januari','Februari','Maret','April','Mei','Juni',
+            'Juli','Agustus','September','Oktober','November','Desember'
+            ] as $bulan)
+            <option value="{{ $bulan }}"
+                class="py-2 hover:bg-gray-100 cursor-pointer">
+                {{ $bulan }}
+            </option>
+            @endforeach
+        </select>
+    </div>
 </div>

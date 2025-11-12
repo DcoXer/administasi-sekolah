@@ -21,14 +21,14 @@
                 x-data="{ show: false }"
                 x-init="setTimeout(() => show = true, 400)"
                 x-bind:class="show ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'"
-                class="transition-all duration-700 ease-out w-full max-w-full sm:max-w-lg lg:max-w-2xl bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-8 border border-white/20">
+                class="transition-all duration-700 ease-out w-full max-w-full sm:max-w-lg lg:max-w-2xl bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200">
 
-                <h2 class="text-2xl sm:text-3xl font-bold text-gray-500 mb-6 text-center tracking-wide">
-                    Masuk ke <span class="text-indigo-500">Sistem Sekolah</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center tracking-wide">
+                    Masuk ke <span class="text-blue-600">Sistem Sekolah</span>
                 </h2>
 
                 @if (session('status'))
-                <div class="mb-4 text-green-300 text-sm text-center">
+                <div class="mb-4 text-green-600 text-sm text-center">
                     {{ session('status') }}
                 </div>
                 @endif
@@ -37,18 +37,18 @@
                     @csrf
 
                     <div>
-                        <label for="email" class="block text-sm text-indigo-500 mb-1">Email</label>
+                        <label for="email" class="block text-sm text-gray-700 mb-1">Email</label>
                         <input id="email" type="email" name="email" required autofocus
-                            class="w-full border border-white/30 bg-white/20 text-gray-800 placeholder-indigo-500 rounded-lg px-3 py-2 focus:outline-none focus:ring-none transition"
+                            class="w-full border border-gray-300 bg-white text-gray-800 placeholder-gray-500 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="Masukkan email Anda">
                     </div>
 
                     <div class="relative">
-                        <label for="password" class="block text-sm text-indigo-500 mb-1">Kata Sandi</label>
+                        <label for="password" class="block text-sm text-gray-700 mb-1">Kata Sandi</label>
                         <input id="password" type="password" name="password" required
-                            class="w-full border border-white/30 bg-white/20 text-gray-800 placeholder-indigo-500 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+                            class="w-full border border-gray-300 bg-white text-gray-800 placeholder-gray-500 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                             placeholder="••••••••">
-                        <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-indigo-500 hover:text-grey-300 transition">
+                        <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-gray-600 hover:text-gray-800 transition">
                             <!-- Eye Icons -->
                             <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -65,25 +65,24 @@
                         </button>
                     </div>
 
-                    <div class="flex items-center justify-between text-sm text-indigo-500 flex-wrap gap-2">
+                    <div class="flex items-center justify-between text-sm text-gray-700 flex-wrap gap-2">
                         <label class="flex items-center gap-2">
-                            <input type="checkbox" name="remember" class="accent-indigo-800">
+                            <input type="checkbox" name="remember" class="accent-blue-600">
                             <span>Ingat saya</span>
                         </label>
-                        <a href="{{ route('password.request') }}" class="hover:underline hover:text-white transition">Lupa sandi?</a>
+                        <a href="{{ route('password.request') }}" class="hover:underline hover:text-blue-600 transition">Lupa sandi?</a>
                     </div>
 
                     <div>
-                        <button
-                            class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2.5 rounded-lg font-semibold shadow-lg hover:from-indigo-600 hover:to-purple-700 transform hover:-translate-y-0.5 transition-all duration-300">
+                        <x-button-spinner class="w-full">
                             Masuk
-                        </button>
+                        </x-button-spinner>
                     </div>
                 </form>
 
-                <div class="mt-6 text-sm text-indigo-400 text-center">
+                <div class="mt-6 text-sm text-gray-600 text-center">
                     Belum punya akun?
-                    <a href="{{ route('register') }}" class="font-medium hover:text-gray-600 hover:underline transition">
+                    <a href="{{ route('register') }}" class="font-medium hover:text-blue-600 hover:underline transition">
                         Daftar
                     </a>
                 </div>

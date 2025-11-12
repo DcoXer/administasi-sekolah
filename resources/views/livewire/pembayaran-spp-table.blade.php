@@ -5,10 +5,13 @@
     class="transition-all duration-700 ease-out p-5 liquid-table">
 
     {{-- Toolbar Actions --}}
-    <x-toolbar-action
-        :create-route="route('pembayaran-spp.create')"
-        :export-route="route('pembayaran-spp.export')"
-        :import-route="route('pembayaran-spp.import')" />
+    <div class="mb-4 space-y-3">
+        <!-- Bagian Action & Search -->
+        <x-toolbar-action
+            :create-route="route('pembayaran-spp.create')"
+            :export-route="route('pembayaran-spp.export')"
+            :import-route="route('pembayaran-spp.import')" />
+    </div>
 
     {{-- Responsive Table --}}
     <div class="overflow-x-auto liquid-table">

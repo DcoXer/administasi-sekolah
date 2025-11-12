@@ -37,7 +37,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @forelse($gurus as $guru)
-                <tr class="hover:bg-white/20">
+                <tr class="hover:bg-gray-50">
                     <td class="px-3 py-2 text-center">{{ ($gurus->currentPage()-1)*$gurus->perPage() + $loop->iteration }}</td>
                     <td class="font-semibold px-3 py-2 text-left">{{ $guru->nama }}</td>
                     <td class="px-3 py-2">{{ $guru->nip }}</td>
