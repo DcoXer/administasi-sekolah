@@ -12,14 +12,11 @@ use App\Http\Controllers\{
     PembayaranSppController,
     MutasiSiswaController,
     PersetujuanMutasiController,
-<<<<<<< HEAD
     RaportPtsController,
-    KelasController
-=======
+    KelasController,
     BidangStudiController,
     NilaiController,
     RaportController
->>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
 };
 use App\Livewire\{
     MutasiSiswaIndex,
@@ -54,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/profile', 'destroy')->name('profile.destroy');
         Route::post('/profile/photo', 'updatePhoto')->name('profile.photo.update');
     });
-<<<<<<< HEAD
 
     // --------------------
     // Data Siswa
@@ -65,29 +61,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import', [SiswaController::class, 'import'])->name('siswa.import');
         Route::delete('/destroy-all', [SiswaController::class, 'destroyAll'])->name('siswa.destroyAll');
     });
-    Route::resource('siswa', SiswaController::class)->except(['index', 'show']);
 
-    // Resource kelas (create, store, edit, update, destroy)
+    Route::resource('siswa', SiswaController::class)->except(['index', 'show']);
     Route::resource('kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
-    Route::get('/kelas/{id}', [KelasController::class, 'kelasShow'])->name('kelas.show');
+    Route::get('/kelas/{kelas}', [KelasController::class, 'kelasShow'])->name('kelas.show');
 
-=======
-
-    // --------------------
-    // Data Siswa
-    // --------------------
-    Route::prefix('siswa')->group(function () {
-        Route::get('/', fn() => view('siswa.index'))->name('siswa.index');
-        Route::get('/export', [SiswaController::class, 'export'])->name('siswa.export');
-        Route::post('/import', [SiswaController::class, 'import'])->name('siswa.import');
-        Route::delete('/destroy-all', [SiswaController::class, 'destroyAll'])->name('siswa.destroyAll');
-    });
-
-    Route::resource('siswa', SiswaController::class)->except(['index', 'show']);
-    Route::get('/kelas', [SiswaController::class, 'kelasIndex'])->name('kelas.index');
-    Route::get('/kelas/{kelas}', [SiswaController::class, 'kelasShow'])->name('kelas.show');
-
->>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     // --------------------
     // Data Guru
     // --------------------
@@ -122,25 +100,17 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:kepala_sekolah'])->group(function () {
         // Persetujuan Mutasi
         //Route::prefix('mutasi')->group(function () {
-<<<<<<< HEAD
         //  Route::get('/', [MutasiApproval::class, 'index'])->name('mutasi.approval');
         //  Route::get('/{id}', [PersetujuanMutasiController::class, 'show'])->name('kepsek.mutasi.show');
         //  Route::put('/{id}', [PersetujuanMutasiController::class, 'update'])->name('kepsek.mutasi.update');
-=======
-          //  Route::get('/', [MutasiApproval::class, 'index'])->name('mutasi.approval');
-          //  Route::get('/{id}', [PersetujuanMutasiController::class, 'show'])->name('kepsek.mutasi.show');
-          //  Route::put('/{id}', [PersetujuanMutasiController::class, 'update'])->name('kepsek.mutasi.update');
->>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
         //});
 
         // Livewire Approval Mutasi
         Route::get('/mutasi-approval', MutasiApproval::class)->name('mutasi.approval');
-<<<<<<< HEAD
-=======
 
         // Bidang Studi Management
         Route::resource('bidang-studi', BidangStudiController::class);
->>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
+
     });
 
     // --------------------
@@ -164,40 +134,40 @@ Route::middleware(['auth'])->group(function () {
         Route::get('daftar-ulang/import', [PembayaranSppController::class, 'import'])->name('daftar-ulang.import');
     });
 
-<<<<<<< HEAD
-    // Raoute Raport PTS
-    Route::prefix('raport-pts')->group(function () {
-        Route::resource('raport-pts', RaportPtsController::class);
-        Route::get('/', [RaportPtsController::class, 'index'])->name('raport.pts.index');
-        Route::get('/{id}', [RaportPtsController::class, 'show'])->name('raport.pts.show');
-        Route::get('/{id}/print', [RaportPtsController::class, 'print'])->name('raport.pts.print');
-=======
-    // --------------------
-    // Role: Guru Bidang & Wali Kelas
-    // --------------------
-    Route::prefix('nilai')->middleware(['checkrole:guru'])->group(function () {
-        Route::get('/', [NilaiController::class, 'index'])->name('nilai.index');
-        Route::get('/{guruBidangId}/input', [NilaiController::class, 'inputNilai'])->name('nilai.input');
-        Route::post('/{guruBidangId}', [NilaiController::class, 'storeNilai'])->name('nilai.store');
-        Route::get('/{nilaiId}/edit', [NilaiController::class, 'editNilai'])->name('nilai.edit');
-        Route::put('/{nilaiId}', [NilaiController::class, 'updateNilai'])->name('nilai.update');
-    });
+// --------------------
+// Role: Guru Bidang & Wali Kelas
+// --------------------
+Route::prefix('nilai')->middleware(['checkrole:guru'])->group(function () {
+    Route::get('/', [NilaiController::class, 'index'])->name('nilai.index');
+    Route::get('/{guruBidangId}/input', [NilaiController::class, 'inputNilai'])->name('nilai.input');
+    Route::post('/{guruBidangId}', [NilaiController::class, 'storeNilai'])->name('nilai.store');
+    Route::get('/{nilaiId}/edit', [NilaiController::class, 'editNilai'])->name('nilai.edit');
+    Route::put('/{nilaiId}', [NilaiController::class, 'updateNilai'])->name('nilai.update');
+});
 
-    Route::prefix('raport')->middleware(['checkrole:guru'])->group(function () {
-        Route::get('/', [RaportController::class, 'index'])->name('raport.index');
-        Route::get('/create', [RaportController::class, 'create'])->name('raport.create');
-        Route::post('/', [RaportController::class, 'store'])->name('raport.store');
-        Route::get('/{raport}', [RaportController::class, 'show'])->name('raport.show');
-        Route::get('/{raport}/edit', [RaportController::class, 'edit'])->name('raport.edit');
-        Route::put('/{raport}', [RaportController::class, 'update'])->name('raport.update');
-        Route::get('/{raport}/print', [RaportController::class, 'printPdf'])->name('raport.print');
-        Route::delete('/{raport}', [RaportController::class, 'destroy'])->name('raport.destroy');
->>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
+Route::prefix('raport')->middleware(['checkrole:guru'])->group(function () {
+    Route::get('/', [RaportController::class, 'index'])->name('raport.index');
+    Route::get('/create', [RaportController::class, 'create'])->name('raport.create');
+    Route::post('/', [RaportController::class, 'store'])->name('raport.store');
+    Route::get('/{raport}', [RaportController::class, 'show'])->name('raport.show');
+    Route::get('/{raport}/edit', [RaportController::class, 'edit'])->name('raport.edit');
+    Route::put('/{raport}', [RaportController::class, 'update'])->name('raport.update');
+    Route::get('/{raport}/print', [RaportController::class, 'printPdf'])->name('raport.print');
+    Route::delete('/{raport}', [RaportController::class, 'destroy'])->name('raport.destroy');
+});
+
+// Raoute Raport PTS
+Route::prefix('raport-pts')->group(function () {
+    Route::resource('raport-pts', RaportPtsController::class);
+    Route::get('/', [RaportPtsController::class, 'index'])->name('raport.pts.index');
+    Route::get('/{id}', [RaportPtsController::class, 'show'])->name('raport.pts.show');
+    Route::get('/{id}/print', [RaportPtsController::class, 'print'])->name('raport.pts.print');
+});
     });
 
     // --------------------
     // Pembayaran Umum
     // --------------------
+    // The extra closing '});' should be removed, as it causes a syntax error.
     Route::resource('daftar-ulang', PembayaranDaftarUlangController::class);
     Route::resource('pembayaran-spp', PembayaranSppController::class);
-});
