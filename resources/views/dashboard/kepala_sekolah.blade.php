@@ -11,10 +11,17 @@
         </div>
         <div class="liquid-card flex items-center justify-between p-4">
             <div>
+<<<<<<< HEAD
                 <h3 class="text-sm font-medium text-indigo-600">Total Guru</h3>
                 <p class="text-lg font-bold text-indigo-800">{{ $totalGuru ?? 0 }}</p>
             </div>
             <svg class="w-10 h-10 text-indigo-500" ...>...</svg>
+=======
+                <h3 class="text-sm font-medium text-blue-600">Total Guru</h3>
+                <p class="text-lg font-bold text-blue-800">{{ $totalGuru ?? 0 }}</p>
+            </div>
+            <svg class="w-10 h-10 text-blue-500" ...>...</svg>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
         </div>
         <div class="liquid-card flex items-center justify-between p-4">
             <div>

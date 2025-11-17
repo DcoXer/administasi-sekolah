@@ -15,7 +15,11 @@
             <select wire:model="siswa_id" class="w-full rounded border border-gray-300 bg-gray-50 text-gray-900 p-2 focus:ring-transparent">
                 <option value="">-- Pilih Siswa --</option>
                 @foreach ($siswas as $s)
+<<<<<<< HEAD
                     <option value="{{ $s->id }}">{{ $s->nama_siswa }}</option>
+=======
+                    <option value="{{ $s->id }}">{{ $s->nama }}</option>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                 @endforeach
             </select>
             @error('siswa_id')

@@ -1,8 +1,13 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
+<<<<<<< HEAD
     // ==================== ROLE: KEPALA SEKOLAH ====================
     @if(($user->role ?? '') === 'kepala_sekolah')
+=======
+    // ==================== ROLE: KEPALA MADRASAH ====================
+    @if(Auth::user()->hasRole('kepala_madrasah'))
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     const mutasiCtx = document.getElementById('mutasiChart');
     if (mutasiCtx) {
         new Chart(mutasiCtx, {
@@ -62,7 +67,11 @@ document.addEventListener("DOMContentLoaded", function() {
     @endif
 
     // ==================== ROLE: STAFF KEUANGAN ====================
+<<<<<<< HEAD
     @if(($user->role ?? '') === 'staff_keuangan')
+=======
+    @if(Auth::user()->hasRole('staff_keuangan'))
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     const duCtx = document.getElementById('duChart');
     if (duCtx) {
         new Chart(duCtx, {
@@ -124,7 +133,11 @@ document.addEventListener("DOMContentLoaded", function() {
     @endif
 
     // ==================== ROLE: OPERATOR ====================
+<<<<<<< HEAD
     @if(($user->role ?? '') === 'operator')
+=======
+    @if(Auth::user()->hasRole('operator'))
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     const siswaCtx = document.getElementById('siswaChart');
     if (siswaCtx) {
         new Chart(siswaCtx, {

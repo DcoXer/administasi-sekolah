@@ -19,4 +19,14 @@ class Guru extends Model
         'jenis_kelamin',
         'no_hp', // ✅ pastikan ada ini
     ];
+
+    public function guruBidang()
+    {
+        return $this->hasMany(GuruBidang::class);
+    }
+
+    public function raportsAsWaliKelas()
+    {
+        return $this->hasMany(Raport::class, 'wali_kelas_id');
+    }
 }

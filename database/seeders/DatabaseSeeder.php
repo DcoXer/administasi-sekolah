@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
@@ -19,5 +20,15 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             MapelSeeder::class,
         ]);
+=======
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $this->call(\Database\Seeders\RolesAndPermissionsSeeder::class);
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     }
 }

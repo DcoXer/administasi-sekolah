@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 
 html {
     scrollbar-width: none;
@@ -272,3 +273,5 @@ body {
         opacity: 1 !important;
     }
 }
+=======
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810

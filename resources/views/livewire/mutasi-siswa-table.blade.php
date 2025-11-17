@@ -17,7 +17,11 @@
             </thead>
             <tbody class="divide-y divide-gray-200 text-center">
                 @foreach ($mutasi as $m)
+<<<<<<< HEAD
                 <tr class="border-b border-gray-300 hover:bg-blue-50 transition">
+=======
+                <tr class="border-b border-gray-700 hover:bg-gray-50 transition">
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                     <td class="p-2">{{ $loop->iteration }}</td>
                     <td class="p-2">{{ $m->siswa->nama ?? '-' }}</td>
                     <td class="p-2">{{ $m->tujuan_sekolah }}</td>

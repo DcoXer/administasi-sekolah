@@ -25,7 +25,11 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @forelse ($pembayaran as $item)
+<<<<<<< HEAD
                 <tr class="hover:bg-blue-50 transition">
+=======
+                <tr class="hover:bg-gray-50">
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                     <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
                     <td class="px-4 py-2">{{ $item->siswa->nama ?? 'Tidak ditemukan' }}</td>
                     <td class="px-4 py-2 text-center">{{ $item->tahun_ajaran }}</td>

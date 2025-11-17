@@ -1,9 +1,12 @@
 <x-guest-layout>
-    <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white overflow-hidden relative">
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-        <!-- Particles -->
-        <canvas id="particles" class="absolute inset-0 z-0"></canvas>
+        <x-validation-errors class="mb-4" />
 
+<<<<<<< HEAD
         <!-- Left Side: Image -->
         <div
             x-data="{ show: false }"
@@ -26,13 +29,42 @@
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-6 text-center tracking-wide">
                     Masuk ke <span class="text-blue-600">Sistem Sekolah</span>
                 </h2>
+=======
+        @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
+            </div>
+        @endif
 
-                @if (session('status'))
-                <div class="mb-4 text-green-300 text-sm text-center">
-                    {{ session('status') }}
-                </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div>
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            </div>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
+
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            </div>
+
+            <div class="block mt-4">
+                <label for="remember_me" class="flex items-center">
+                    <x-checkbox id="remember_me" name="remember" />
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
                 @endif
 
+<<<<<<< HEAD
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
                     @csrf
 
@@ -86,81 +118,12 @@
                         Daftar
                     </a>
                 </div>
+=======
+                <x-button class="ml-4">
+                    {{ __('Log in') }}
+                </x-button>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
             </div>
-        </div>
-    </div>
-
-    <!-- Script Toggle Password -->
-    <script>
-        function togglePassword() {
-            const input = document.getElementById('password');
-            const eyeOpen = document.getElementById('eyeOpen');
-            const eyeClosed = document.getElementById('eyeClosed');
-            if (input.type === 'password') {
-                input.type = 'text';
-                eyeOpen.classList.add('hidden');
-                eyeClosed.classList.remove('hidden');
-            } else {
-                input.type = 'password';
-                eyeOpen.classList.remove('hidden');
-                eyeClosed.classList.add('hidden');
-            }
-        }
-    </script>
-
-    <!-- Script Particles -->
-    <script>
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particlesArray = [];
-        const particleCount = 50;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particlesArray.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
+        </form>
+    </x-authentication-card>
 </x-guest-layout>

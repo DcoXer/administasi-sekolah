@@ -11,6 +11,7 @@
                         <th class="px-4 py-3">Jumlah Siswa</th>
                     </tr>
                 </thead>
+<<<<<<< HEAD
                 <tbody
                     x-data="{
         page: 1,
@@ -63,6 +64,20 @@
 
                 </tbody>
 
+=======
+                <tbody class="divide-y divide-gray-200 text-center">
+                    @forelse($jumlahSiswa ?? [] as $kelas => $total)
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-2 font-semibold">{{ $kelas }}</td>
+                        <td class="px-4 py-2">{{ $total }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="2" class="text-gray-500 py-3">Data siswa tidak tersedia.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
             </table>
         </div>
     </div>
@@ -89,6 +104,7 @@
                         <th class="px-4 py-3">Jumlah Guru</th>
                     </tr>
                 </thead>
+<<<<<<< HEAD
                 <tbody
                     x-data="{
         page: 1,
@@ -141,6 +157,20 @@
 
                 </tbody>
 
+=======
+                <tbody class="divide-y divide-gray-200 text-center">
+                    @forelse($jumlahGuru ?? [] as $mapel => $total)
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-2 font-semibold">{{ $mapel }}</td>
+                        <td class="px-4 py-2">{{ $total }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="2" class="text-gray-500 py-3">Data guru tidak tersedia.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
             </table>
         </div>
     </div>

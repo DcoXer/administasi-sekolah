@@ -26,7 +26,11 @@
             <tbody class="divide-y divide-gray-200 text-center">
                 @forelse($mutasi as $m)
                 <tr class="hover:bg-gray-50">
+<<<<<<< HEAD
                     <td class="px-4 py-2">{{ $m->siswa->nama_siswa }}</td>
+=======
+                    <td class="px-4 py-2">{{ $m->siswa->name }}</td>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                     <td class="px-4 py-2">{{ $m->siswa->kelas }}</td>
                     <td class="px-4 py-2">{{ ucfirst($m->status) }}</td>
                     <td class="px-4 py-2">{{ $m->created_at->format('d M Y') }}</td>

@@ -23,7 +23,11 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @foreach ($users as $user)
+<<<<<<< HEAD
                 <tr class="hover:bg-blue-50 transition">
+=======
+                <tr class="hover:bg-gray-50">
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                     <td class="px-3 py-2 text-center">{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
                     <td class="px-3 py-2 text-left">{{ $user->name }}</td>
                     <td class="px-3 py-2 text-center">{{ $user->email }}</td>

@@ -42,6 +42,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @forelse($siswas as $siswa)
+<<<<<<< HEAD
                 <tr class="hover:bg-gray-50 transition-colors duration-150">
                     <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">{{ ($siswas->currentPage()-1)*$siswas->perPage() + $loop->iteration }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">{{ $siswa->nama_siswa }}</td>
@@ -50,6 +51,16 @@
                     <td class="px-4 py-3 whitespace-nowrap text-sm text-center text-gray-700">{{ $siswa->jenis_kelamin }}</td>
                     <td class="px-4 py-3 text-sm text-gray-700">{{ Str::limit($siswa->alamat, 30) }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-sm">
+=======
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2">{{ ($siswas->currentPage()-1)*$siswas->perPage() + $loop->iteration }}</td>
+                    <td class="font-semibold px-4 py-2">{{ $siswa->nama }}</td>
+                    <td class="px-4 py-2">{{ $siswa->nisn }}</td>
+                    <td class="text-center px-4 py-2">{{ $siswa->kelas }}</td>
+                    <td class="px-4 py-2">{{ $siswa->jenis_kelamin }}</td>
+                    <td class="px-4 py-2">{{ $siswa->alamat }}</td>
+                    <td>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                         <x-action-buttons
                             :edit-url="route('siswa.edit',$siswa->id)"
                             :delete-url="route('siswa.destroy',$siswa->id)" />

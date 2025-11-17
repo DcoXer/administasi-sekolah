@@ -11,6 +11,7 @@
         x-transition.opacity
         class="fixed inset-0 flex items-center justify-center z-[9999]">
 
+<<<<<<< HEAD
         <!-- Background -->
         <div class="absolute inset-0 bg-gray-100 opacity-90"></div>
 
@@ -18,15 +19,36 @@
         <div class="relative bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col items-center">
             <div class="w-16 h-16 border-[3px] border-t-transparent border-blue-500 rounded-full animate-spin"></div>
             <p class="mt-4 text-gray-800 font-semibold">Loading...</p>
+=======
+        <!-- Liquid Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute w-[600px] h-[600px] -top-48 -left-48 bg-blue-200
+                rounded-full blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute w-[500px] h-[500px] -bottom-40 -right-40 bg-blue-300
+                rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        </div>
+
+        <!-- Loader Card -->
+        <div class="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex flex-col items-center">
+            <div class="w-16 h-16 border-[3px] border-t-transparent border-blue-600 rounded-full animate-spin"></div>
+            <p class="mt-4 text-gray-700 font-semibold">Loading...</p>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
         </div>
     </div>
 
     <!-- Loader Livewire -->
     <div wire:loading.delay
+<<<<<<< HEAD
         class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-[9999]">
 
         <div class="relative bg-white p-8 rounded-lg shadow-lg border border-gray-200 flex flex-col items-center">
             <div class="w-14 h-14 border-[3px] border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+=======
+        class="fixed inset-0 flex items-center justify-center bg-black/30 z-[9999]">
+
+        <div class="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex flex-col items-center">
+            <div class="w-14 h-14 border-[3px] border-t-transparent border-blue-600 rounded-full animate-spin"></div>
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
             <p class="mt-3 text-gray-700 font-medium">Processing...</p>
         </div>
     </div>

@@ -34,11 +34,16 @@
 
     {{-- Right side: Search --}}
     <div class="flex items-center gap-4 w-full sm:w-auto">
+<<<<<<< HEAD
         {{-- Search (dengan filter bulan hanya untuk staff_keuangan) --}}
         @if(Auth::check() && Auth::user()->role === 'staff_keuangan')
             <x-search-with-year />
         @else
             <x-search-simple />
         @endif
+=======
+        {{-- Search --}}
+        <x-search-with-year />
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
     </div>
 </div>

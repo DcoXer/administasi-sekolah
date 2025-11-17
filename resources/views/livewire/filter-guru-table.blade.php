@@ -37,7 +37,11 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @forelse($gurus as $guru)
+<<<<<<< HEAD
                 <tr class="hover:bg-blue-50 transition">
+=======
+                <tr class="hover:bg-gray-50">
+>>>>>>> 7881684e027466948b9fc35eb8f243bc2c31e810
                     <td class="px-3 py-2 text-center">{{ ($gurus->currentPage()-1)*$gurus->perPage() + $loop->iteration }}</td>
                     <td class="font-semibold px-3 py-2 text-left">{{ $guru->nama }}</td>
                     <td class="px-3 py-2">{{ $guru->nip }}</td>
