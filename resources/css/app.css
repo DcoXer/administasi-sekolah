@@ -8,53 +8,33 @@ html {
 }
 
 body {
-    background: radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
-        radial-gradient(at 70% 70%, #f9a8d4, transparent 60%),
-        radial-gradient(at 50% 90%, #93c5fd, transparent 60%), #fdfdfd;
-    background-attachment: fixed;
+    background: #f5f7fa;
 }
 
-/* Liquid Card (Glassmorphism vibes) */
+/* Card untuk Tabel */
 .liquid-table {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.6),
-        rgba(255, 255, 255, 0.15)
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: #ffffff;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
     padding: 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .liquid-card {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.6),
-        rgba(255, 255, 255, 0.15)
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
+    background: #ffffff;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     width: 100%;
     min-width: 0;
 }
 
 .liquid-card:hover {
-    transform: translateY(-6px) scale(1.015);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.75),
-        rgba(255, 255, 255, 0.25)
-    );
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
 }
 
 @keyframes fadeInUp {
@@ -93,8 +73,8 @@ body {
 }
 
 .glass {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
 }
 
 .transition-width {
@@ -102,8 +82,7 @@ body {
 }
 
 .menu-hover:hover {
-    background: rgba(99, 102, 241, 0.1);
-    box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.2);
+    background: #eff6ff;
 }
 
 .ripple {
@@ -127,86 +106,46 @@ body {
     }
 }
 
-@keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
 .btn-ultimate {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px 22px;
-    border-radius: 9999px;
+    border-radius: 0.5rem;
     font-weight: 600;
     font-size: 1rem;
-    color: #1c1b1b;
-    background: radial-gradient(at 30% 30%, #c3cdff, transparent 60%),
-        radial-gradient(at 70% 70%, #d7eaff, transparent 60%),
-        radial-gradient(at 50% 90%, #cadbef, transparent 60%), #fdfdfd;
-    background-size: 300% 300%;
-    animation: gradientFlow 6s ease infinite;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    color: #ffffff;
+    background: #3b82f6;
     border: none;
-    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .btn-ultimate:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background: #2563eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
 }
 
 .btn-ultimate:active {
-    transform: scale(0.95);
-}
-
-.btn-ultimate::after {
-    content: "";
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    top: 50%;
-    left: 50%;
-    transform: scale(0);
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.btn-ultimate:active::after {
-    transform: scale(4);
-    opacity: 0;
-    transition: transform 0.6s ease, opacity 0.6s ease;
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .input-ultimate {
-    border: 1px solid radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
-        radial-gradient(at 70% 70%, #d7eaff, transparent 60%),
-        radial-gradient(at 50% 90%, #93c5fd, transparent 60%), #fdfdfd;
-    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
     padding: 8px 12px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
     transition: all 0.3s ease;
     font-size: 0.9rem;
 }
 
 .input-ultimate:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     outline: none;
 }
 
@@ -214,25 +153,41 @@ body {
 .table-ultimate {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     background: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
 .table-ultimate th {
-    background: #f3f4f6;
-    text-align: center;
-    padding: 10px;
+    background: #f8fafc;
+    text-align: left;
+    padding: 0.875rem 1rem;
     border-bottom: 2px solid #e5e7eb;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
 }
 
 .table-ultimate td {
-    padding: 10px;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    vertical-align: middle;
 }
 
-.table-ultimate tr:hover {
-    background: #eef2ff;
-    transition: 0.3s;
+.table-ultimate tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table-ultimate tbody tr:hover {
+    background: #f8fafc;
+}
+
+.table-ultimate tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .pagination {
@@ -251,32 +206,31 @@ body {
 }
 
 .pagination a {
-    background: radial-gradient(at 30% 30%, #a5b4fc, transparent 60%),
-        radial-gradient(at 70% 70%, #f9a8d4, transparent 60%),
-        radial-gradient(at 50% 90%, #93c5fd, transparent 60%), #fdfdfd;
-    background-attachment: fixed;
+    background: #ffffff;
     color: #4b5563;
+    border: 1px solid #e5e7eb;
 }
 
 .pagination a:hover {
-    background: #4f46e5;
+    background: #3b82f6;
     color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    border-color: #3b82f6;
 }
 
 .pagination .active {
-    background: #4f46e5;
+    background: #3b82f6;
     color: #fff;
+    border-color: #3b82f6;
 }
 
 /* 🎨 Badge Tahun Ajaran */
 .badge-year {
-    background: rgba(99, 102, 241, 0.1);
-    color: #4f46e5;
+    background: #dbeafe;
+    color: #1e40af;
     font-weight: 600;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 0.5rem;
+    border: 1px solid #93c5fd;
 }
 
 /* === Reveal arah khusus (aksesibel & smooth) === */

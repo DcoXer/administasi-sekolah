@@ -14,10 +14,18 @@ class PembayaranSppTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $bulan = '';
 
     protected $paginationTheme = 'tailwind';
 
+    // Reset page kalau search berubah
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    // Reset page kalau bulan berubah
+    public function updatingBulan()
     {
         $this->resetPage();
     }
@@ -25,10 +33,19 @@ class PembayaranSppTable extends Component
     public function render()
     {
         $query = PembayaranSpp::with('siswa')
-            ->when($this->search, fn($q) =>
-                $q->whereHas('siswa', fn($s) =>
-                    $s->where('nama', 'like', '%'.$this->search.'%')
+            ->when(
+                $this->search,
+                fn($q) =>
+                $q->whereHas(
+                    'siswa',
+                    fn($s) =>
+                    $s->where('nama', 'like', '%' . $this->search . '%')
                 )
+            )
+            ->when(
+                $this->bulan,
+                fn($q) =>
+                $q->whereRaw('LOWER(bulan) LIKE ?', ['%' . strtolower($this->bulan) . '%'])
             )
             ->latest();
 

@@ -10,10 +10,10 @@ class Siswa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 
+        'nama_siswa', 
         'nisn',
         'nik',
-        'kelas',
+        'kelas_id',
         'tempat_lahir',
         'tanggal_lahir',
         'jenis_kelamin',
@@ -23,6 +23,21 @@ class Siswa extends Model
         'nama_wali'
     ];
 
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
+
+    public function nilaiPTS()
+    {
+        return $this->hasMany(NilaiPTS::class);
+    }
+
+    public function raportPTS()
+    {
+        return $this->hasMany(RaportPTS::class);
+    }
+    
     public function daftarUlang()
     {
         return $this->hasMany(PembayaranDaftarUlang::class);

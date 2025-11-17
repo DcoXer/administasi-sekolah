@@ -245,7 +245,7 @@
                     </div>
 
                     <!-- Card Prestasi -->
-                    <div class="w-11/12 md:w-10/12 mx-auto mt-28 p-6 rounded-3xl bg-white/70 shadow-2xl" data-reveal="left">
+                    <div class="w-11/12 md:w-10/12 mx-auto mt-20 p-6 rounded-3xl bg-white/70 shadow-2xl" data-reveal="left">
                         <h4 class="text-xl font-bold text-slate-800 mb-3">Prestasi & Kegiatan Siswa</h4>
                         <p class="text-slate-600 text-sm leading-relaxed mb-2">
                             Siswa kami aktif mengikuti berbagai lomba akademik dan non-akademik di tingkat kota hingga nasional, meraih prestasi gemilang di bidang sains, seni, dan olahraga.
@@ -392,8 +392,8 @@
 
 
     <!-- ===== Footer ===== -->
-    <footer class="py-6 text-center text-slate-600">
-        <p>&copy; {{ date('Y') }} SekolahKu. All rights reserved.</p>
+    <footer class="py-6 text-center text-slate-700">
+        <p>&copy; {{ date('Y') }} SekolahKu By Firzi Fathir Mas'ud. All rights reserved.</p>
     </footer>
 
     <script>

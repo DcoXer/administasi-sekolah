@@ -16,39 +16,46 @@ class SiswaImport implements ToModel, WithHeadingRow, SkipsOnFailure, WithValida
 
     public function model(array $row)
     {
-        // ✅ Skip baris kalau nama kosong atau tidak ada
-        if (empty($row['nama'])) {
-            Log::warning('⚠️ Baris dilewati karena nama kosong: ' . json_encode($row));
+        // FIX: Hilangin spasi yang bikin error
+        if (empty($row['nama_siswa'])) {
+            Log::warning('⚠️ Baris dilewati karena nama siswa tidak ada: ' . json_encode($row));
             return null;
         }
 
-        try {
-            return new Siswa([
-                'nama'          => $row['nama'] ?? '',
-                'nisn'          => $row['nisn'] ?? '',
-                'nik'           => $row['nik'] ?? '',
-                'kelas'         => $row['kelas'] ?? '',
-                'tempat_lahir'  => $row['tempat_lahir'] ?? '',
-                'tanggal_lahir' => $row['tanggal_lahir'] ?? null,
-                'jenis_kelamin' => $row['jenis_kelamin'] ?? '',
-                'alamat'        => $row['alamat'] ?? '',
-                'nama_ayah'     => $row['nama_ayah'] ?? '',
-                'nama_ibu'      => $row['nama_ibu'] ?? '',
-                'nama_wali'     => $row['nama_wali'] ?? '',
-            ]);
-        } catch (\Exception $e) {
-            Log::error('❌ Gagal import baris: ' . json_encode($row) . ' | Error: ' . $e->getMessage());
-            return null;
-        }
+        // Cegah crash karena unique NISN & NIK
+        return Siswa::firstOrCreate(
+            [
+                'nisn' => $row['nisn'], // unique NISN
+            ],
+            [
+                'nik'            => $row['nik'] ?? null,
+                'nama_siswa'     => $row['nama_siswa'] ?? null,
+                'kelas_id'       => $row['kelas_id'] ?? null,
+                'tempat_lahir'   => $row['tempat_lahir'] ?? null,
+                'tanggal_lahir'  => $row['tanggal_lahir'] ?? null,
+                'jenis_kelamin'  => $row['jenis_kelamin'] ?? null,
+                'alamat'         => $row['alamat'] ?? null,
+                'nama_ayah'      => $row['nama_ayah'] ?? null,
+                'nama_ibu'       => $row['nama_ibu'] ?? null,
+                'nama_wali'      => $row['nama_wali'] ?? null,
+            ]
+        );
     }
 
     public function rules(): array
     {
         return [
-            '*.nama'  => 'required|string',
-            '*.nisn'  => 'required|string',
-            '*.nik'   => 'required|string',
-            '*.kelas' => 'required|string',
+            '*.nisn'           => 'required|string',
+            '*.nik'            => 'required|string',
+            '*.nama_siswa'     => 'required|string',
+            '*.kelas_id'       => 'required',
+            '*.tempat_lahir'   => 'required|string',
+            '*.tanggal_lahir'  => 'required|date',
+            '*.jenis_kelamin'  => 'required|string',
+            '*.alamat'         => 'nullable|string',
+            '*.nama_ayah'      => 'nullable|string',
+            '*.nama_ibu'       => 'nullable|string',
+            '*.nama_wali'      => 'nullable|string',
         ];
     }
 }

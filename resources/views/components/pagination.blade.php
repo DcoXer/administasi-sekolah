@@ -7,19 +7,17 @@
     <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gray-200 text-gray-400 cursor-not-allowed shadow-inner">⟨</span>
     @else
     <a href="{{ $paginator->previousPageUrl() }}"
-        class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full 
-                  bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-700 
+        class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg 
+                  bg-blue-100 text-blue-700 
                   font-semibold shadow transition transform 
-                  hover:-translate-y-0.5 hover:shadow-lg 
-                  hover:from-indigo-200 hover:to-blue-200 relative overflow-hidden group">
-        <span class="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-10 transition duration-500 rounded-full"></span>
+                  hover:bg-blue-200 hover:shadow-md">
         ⟨
     </a>
     @endif
 
     {{-- Pages --}}
     {{-- Mobile: hanya current page --}}
-    <span class="block sm:hidden px-3 py-1.5 rounded-full bg-indigo-600 text-white font-bold shadow-lg">
+    <span class="block sm:hidden px-3 py-1.5 rounded-lg bg-blue-600 text-white font-bold shadow">
         {{ $paginator->currentPage() }} / {{ $paginator->lastPage() }}
     </span>
 
@@ -33,16 +31,15 @@
         @if (is_array($element))
         @foreach ($element as $page => $url)
         @if ($page == $paginator->currentPage())
-        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-indigo-600 text-white font-bold shadow-lg transform scale-105">
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-blue-600 text-white font-bold shadow">
             {{ $page }}
         </span>
         @else
         <a href="{{ $url }}"
-            class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full 
-                                  bg-white border border-gray-300 hover:bg-indigo-50 
-                                  text-gray-700 font-semibold shadow transition transform 
-                                  hover:-translate-y-0.5 hover:shadow-lg relative overflow-hidden group">
-            <span class="absolute inset-0 bg-indigo-200 opacity-0 group-hover:opacity-10 transition duration-500 rounded-full"></span>
+            class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg 
+                                  bg-white border border-gray-300 hover:bg-blue-50 
+                                  text-gray-700 font-semibold shadow transition 
+                                  hover:shadow-md">
             {{ $page }}
         </a>
         @endif
@@ -54,12 +51,10 @@
     {{-- Next --}}
     @if ($paginator->hasMorePages())
     <a href="{{ $paginator->nextPageUrl() }}"
-        class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full 
-                  bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-700 
+        class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg 
+                  bg-blue-100 text-blue-700 
                   font-semibold shadow transition transform 
-                  hover:-translate-y-0.5 hover:shadow-lg 
-                  hover:from-indigo-200 hover:to-blue-200 relative overflow-hidden group">
-        <span class="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-10 transition duration-500 rounded-full"></span>
+                  hover:bg-blue-200 hover:shadow-md">
         ⟩
     </a>
     @else

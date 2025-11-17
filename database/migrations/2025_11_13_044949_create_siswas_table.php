@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nisn')->unique(); // NISN unik
             $table->string('nik')->unique();  // NIK unik
-            $table->string('nama');
+            $table->string('nama_siswa');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // enum untuk jenis kelamin
@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('nama_ayah')->nullable();
             $table->string('nama_ibu')->nullable();
             $table->string('nama_wali')->nullable();
-            $table->string('kelas');
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }

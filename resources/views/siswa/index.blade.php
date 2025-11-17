@@ -1,8 +1,7 @@
 <x-app-layout>
     <div class="flex-1 p-6 space-y-6">
-        @if (session('success'))
-        <x-alert-success :message="session('success')" />
-        @endif
+        <x-alert-success />
+        <x-alert-error />
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-3xl font-extrabold text-gray-800 tracking-wide gap-4 flex justify-between">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">

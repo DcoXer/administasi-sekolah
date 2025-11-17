@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class SiswaController extends Controller
 {
     /**
-     * ✅ Index tidak melakukan query manual.
+     * Index tidak melakukan query manual.
      * Semua filter, search, pagination ditangani oleh Livewire.
      */
     public function index()
@@ -27,23 +27,30 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nisn'          => 'required|string|max:20|unique:siswas,nisn',
-            'nik'           => 'required|string|max:20|unique:siswas,nik',
-            'nama'          => 'required|string|max:255',
-            'tempat_lahir'  => 'required|string|max:100',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'alamat'        => 'nullable|string',
-            'nama_ayah'     => 'nullable|string|max:255',
-            'nama_ibu'      => 'nullable|string|max:255',
-            'nama_wali'     => 'nullable|string|max:255',
-            'kelas'         => 'required|string|max:50',
-        ]);
+        try {
+            $request->validate([
+                'nisn'          => 'required|string|max:20|unique:siswas,nisn',
+                'nik'           => 'required|string|max:20|unique:siswas,nik',
+                'nama_siswa'    => 'required|string|max:255',
+                'tempat_lahir'  => 'required|string|max:100',
+                'tanggal_lahir' => 'required|date',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+                'alamat'        => 'nullable|string',
+                'nama_ayah'     => 'nullable|string|max:255',
+                'nama_ibu'      => 'nullable|string|max:255',
+                'nama_wali'     => 'nullable|string|max:255',
+                'kelas_id'      => 'required|exists:kelas,id',
+            ]);
 
-        Siswa::create($request->all());
+            Siswa::create($request->all());
 
-        return redirect()->route('siswa.index')->with('success', '✅ Siswa berhasil ditambahkan!');
+            return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil ditambahkan!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            Log::error('Error store siswa: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal menambahkan data siswa. Silakan coba lagi.')->withInput();
+        }
     }
 
     public function edit(Siswa $siswa)
@@ -53,29 +60,41 @@ class SiswaController extends Controller
 
     public function update(Request $request, Siswa $siswa)
     {
-        $request->validate([
-            'nama'          => 'required|string|max:255',
-            'nisn'          => 'required|string|max:20|unique:siswas,nisn,' . $siswa->id,
-            'nik'           => 'required|string|max:20|unique:siswas,nik,' . $siswa->id,
-            'kelas'         => 'required|string|max:50',
-            'tempat_lahir'  => 'required|string|max:100',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'alamat'        => 'nullable|string',
-            'nama_ayah'     => 'nullable|string|max:255',
-            'nama_ibu'      => 'nullable|string|max:255',
-            'nama_wali'     => 'nullable|string|max:255',
-        ]);
+        try {
+            $request->validate([
+                'nama_siswa'    => 'required|string|max:255',
+                'nisn'          => 'required|string|max:20|unique:siswas,nisn,' . $siswa->id,
+                'nik'           => 'required|string|max:20|unique:siswas,nik,' . $siswa->id,
+                'kelas_id'      => 'required|exists:kelas,id',
+                'tempat_lahir'  => 'required|string|max:100',
+                'tanggal_lahir' => 'required|date',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+                'alamat'        => 'nullable|string',
+                'nama_ayah'     => 'nullable|string|max:255',
+                'nama_ibu'      => 'nullable|string|max:255',
+                'nama_wali'     => 'nullable|string|max:255',
+            ]);
 
-        $siswa->update($request->all());
+            $siswa->update($request->all());
 
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diupdate.');
+            return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            Log::error('Error update siswa: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal memperbarui data siswa. Silakan coba lagi.')->withInput();
+        }
     }
 
     public function destroy(Siswa $siswa)
     {
-        $siswa->delete();
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil dihapus.');
+        try {
+            $siswa->delete();
+            return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error('Error delete siswa: ' . $e->getMessage());
+            return redirect()->route('siswa.index')->with('error', 'Gagal menghapus data siswa. Silakan coba lagi.');
+        }
     }
 
     public function destroyAll()

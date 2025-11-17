@@ -12,7 +12,7 @@
 
     {{-- Filter & Search --}}
     <div class="flex justify-between items-center flex-wrap gap-3 mb-4">
-        <select wire:model.live.debounce.300ms="mata_pelajaran" class="input-ultimate w-40">
+        <select wire:model.live.debounce.300ms="mata_pelajaran" class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
             <option value="">Semua Mapel</option>
             @foreach($mapelList as $m)
             <option value="{{ trim($m) }}">{{ $m }}</option>
@@ -37,7 +37,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @forelse($gurus as $guru)
-                <tr class="hover:bg-white/20">
+                <tr class="hover:bg-blue-50 transition">
                     <td class="px-3 py-2 text-center">{{ ($gurus->currentPage()-1)*$gurus->perPage() + $loop->iteration }}</td>
                     <td class="font-semibold px-3 py-2 text-left">{{ $guru->nama }}</td>
                     <td class="px-3 py-2">{{ $guru->nip }}</td>

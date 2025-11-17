@@ -16,7 +16,8 @@
     @livewireStyles
 </head>
 
-<body class="bg-gray-100 font-sans antialiased">
+<body class="font-sans antialiased">
+    <x-loading />
     <div x-data="{
         open: window.innerWidth > 768,
         userMenu: false,
@@ -42,6 +43,31 @@
         </main>
     </div>
     @livewireScripts
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('loader', () => ({
+                show: true,
+                init() {
+                    // ilangin loading setelah page selesai render
+                    window.addEventListener('load', () => {
+                        setTimeout(() => {
+                            this.show = false
+                        }, 1500) // delay 0.5 detik biar animasi keliatan
+                    })
+
+                    // event global buat munculin loading
+                    window.addEventListener('loading', () => {
+                        this.show = true
+                    })
+
+                    // event global buat ngilangin loading
+                    window.addEventListener('loading-done', () => {
+                        this.show = false
+                    })
+                }
+            }))
+        })
+    </script>
 </body>
 
 </html>

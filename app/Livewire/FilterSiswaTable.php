@@ -33,23 +33,23 @@ class FilterSiswaTable extends Component
         $query = Siswa::query();
 
         if (trim($this->kelas) !== '') {
-            $query->where('kelas', $this->kelas);
+            $query->where('kelas_id', (int)$this->kelas);
         }
 
         if (trim($this->search) !== '') {
             $query->where(function ($q) {
                 $term = "%{$this->search}%";
-                $q->where('nama', 'like', $term)
+                $q->where('nama_siswa', 'like', $term)
                     ->orWhere('nisn', 'like', $term)
                     ->orWhere('nik', 'like', $term);
             });
         }
 
         // Pagination & urut nama
-        $siswas = $query->orderBy('nama')->paginate(10);
+        $siswas = $query->orderBy('nama_siswa')->paginate(10);
 
         // Ambil Data Kelas Untuk Dropdown
-        $kelasList = Siswa::select('kelas')->distinct()->orderBy('kelas')->pluck('kelas');
+        $kelasList = \App\Models\Kelas::orderBy('nama_kelas')->get();
 
         return view('livewire.filter-siswa-table', [
             'siswas' => $siswas,

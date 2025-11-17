@@ -21,7 +21,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
         'profile_photo',
     ];
 
@@ -43,4 +42,35 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // Wali Kelas relationship
+    public function kelasWali(){
+        return $this->hasMany(Kelas::class, 'wali_kelas_id');
+    }
+
+    // Guru Bidang Studi relationship
+    public function mapels(){
+        return $this->hasMany(Mapel::class, 'guru_id');
+    }
+
+    // Guru Input Nilai relationship
+    public function nilaiPTS(){
+        return $this->hasMany(NilaiPTS::class, 'guru_id');
+    }
+
+    // Wali Kelas Raport relationship
+    public function raportPTS(){
+        return $this->hasMany(RaportPTS::class, 'wali_kelas_id');  
+    }
+
+    // Helper untuk mengecek role user
+    public function hasRole($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->exists();
+    }
 }
